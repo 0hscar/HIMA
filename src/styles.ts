@@ -10,7 +10,13 @@ export const textStyles = StyleSheet.create({
         fontWeight: "bold",
         marginTop: 20,
         marginLeft: 10
+    },
+    propertyText: {
+        fontFamily: "Couchin",
+        color: "black",
+        marginTop: 10,
 
     }
 
 })
+

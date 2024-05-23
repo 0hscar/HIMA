@@ -1,6 +1,7 @@
 import React from "react"
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import HomeScreen from './home/HomeScreen'
+import CreateNewScreen from "./createNew/CreateNewScreen"
 
 const Tab = createBottomTabNavigator()
 
@@ -39,8 +40,8 @@ const AppNavigation = () => (
         />
 
         <Tab.Screen
-            name="create"
-            component={HomeScreen} //To change
+            name="Create"
+            component={CreateNewScreen} 
             options={{
                 title: "Create new"
             }}

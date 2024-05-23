@@ -10,9 +10,9 @@ interface HomeScreenProps {
 
 // Dummy data
 const data = [
-    {adress: "String1"},
-    {adress: "String2"},
-    {adress: "String3"}
+    {adress: "1st Street"},
+    {adress: "2nd Streed"},
+    {adress: "3rd Street"}
 ]
 
 const PropertyList = () => {
@@ -20,9 +20,11 @@ const PropertyList = () => {
         <View>
             <FlatList
                 data={data}
-                renderItem={({item}) => <Text style={textStyles.baseText}>{item.adress}</Text>} 
+                style={{
+                    backgroundColor: "darkgrey"
+                }}
+                renderItem={({item}) => <Text style={textStyles.propertyText}>{item.adress}</Text>} 
             />
-
         </View>
     )
 }
@@ -31,12 +33,12 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
     return (
         <View>
             <Text style={textStyles.titleText}>Properties</Text>
-            <PropertyList></PropertyList>
-
+            <PropertyList/>
+            {/* TODO: Show upcoming expiring date, example: Air filter cleaning in ... */}
         </View>
     )
 
 }
 
 
-export default HomeScreenq
+export default HomeScreen
