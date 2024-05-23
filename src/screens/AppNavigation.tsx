@@ -11,6 +11,10 @@ const AppNavigation = () => (
                 backgroundColor: "grey",
             
             },
+            tabBarItemStyle:{
+                backgroundColor: "lightblue", //placeholders
+                color: "black",
+            },
             tabBarHideOnKeyboard: true,
         })}
     >
@@ -18,11 +22,29 @@ const AppNavigation = () => (
             name="Home"
             component={HomeScreen}
             options={{
-                title: "Home LOL",
+                title: "Home",
+            
                 // More stuff here
+            }}
+            
+        />
+
+        <Tab.Screen 
+            name="placeholder"
+            component={HomeScreen} //to change
+            options={{
+                title: "placeholder",
+                                
             }}
         />
 
+        <Tab.Screen
+            name="create"
+            component={HomeScreen} //To change
+            options={{
+                title: "Create new"
+            }}
+        />
 
 
     </Tab.Navigator>        
