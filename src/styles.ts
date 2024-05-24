@@ -23,10 +23,23 @@ export const textStyles = StyleSheet.create({
         color: "black",
         marginTop: 10,
 
+    },
+    multiSelectFooterText: {
+        padding: 12,
+        marginTop: 12,
+        backgroundColor: "lightgray"
     }
 
 })
 
+export const divStyles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: "#fff",
+        justifyContent: "center",
+        padding: 24
+    }
+})
 
 export const dropdownStyles = StyleSheet.create({
     multiSelect: {
@@ -37,5 +50,10 @@ export const dropdownStyles = StyleSheet.create({
         marginTop: 10,
         marginLeft: 5,
         marginRight: 5,
-    }
+    },
+    multiSelectHeader: {
+        height: 24,
+        backgroundColor: "red"
+    },
+    
 })
