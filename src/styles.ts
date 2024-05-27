@@ -27,7 +27,6 @@ export const textStyles = StyleSheet.create({
     multiSelectFooterText: {
         padding: 12,
         marginTop: 12,
-        backgroundColor: "lightgray"
     }
 
 })
@@ -50,7 +49,7 @@ export const dropdownStyles = StyleSheet.create({
         marginTop: 10,
         marginLeft: 5,
         marginRight: 5,
-    },
+    }, 
     multiSelectHeader: {
         height: 24,
         backgroundColor: "red"

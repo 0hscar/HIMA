@@ -5,33 +5,49 @@ import MultiSelectComponent from "../../components/MultiSelectComponent";
 import { items } from "../../propertyInfoSelection";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const CreateNewScreen: React.FC = () => {
-    const [createData, setCreateData] = useState({})
+const getSelected = async(): Promise<string | undefined> => {
+    try {
+        const value = await AsyncStorage.getItem("tempSelected")
+        if (value !== null) {
+            console.log(typeof(value))
+            return value
+        } else {
+            console.log("No value")
+        }
+    }
+    catch (error) {
 
-    console.log(AsyncStorage.getItem("test"))
-    return(
+    }
+}
+
+const test = async() => {
+    return await AsyncStorage.getItem("tempSelected")
+}
+
+const CreateNewScreen: React.FC = () => {
+
+    // To be removed
+    // console.log(AsyncStorage.getItem("test"))
+    // console.log(AsyncStorage.getItem("tempSelected"))
+
+    // AsyncStorage.clear()
+    const tempSelected = getSelected
+    console.log(test())
+    console.log(tempSelected())
+
+    const testVar = "atiogjgi"
+
+    return (
         <View>
             {/* TODO: Create components */}
             <Text style={textStyles.titleText}>Create new property</Text>
-            <Text style={textStyles.smallTitleText}>Basic information</Text>
-            <MultiSelectComponent items={items}></MultiSelectComponent> 
-
-            {/* <Text style={textStyles.smallTitleText}>Household appliances</Text>
-            <MultiSelectComponent data={selectableData.houseHoldAppliances}></MultiSelectComponent> 
-            
-            <Text style={textStyles.smallTitleText}>Service</Text>
-            <MultiSelectComponent data={selectableData.serviceNeeds}></MultiSelectComponent>  
-            {/* Might be redundant/changed */}
-
-            {/* <Text style={textStyles.smallTitleText}>Ongoing costs</Text>
-            <MultiSelectComponent data={selectableData.onGoingCosts}></MultiSelectComponent>  */} 
-            
-                    
-
-            {/* Created Components */}
-
-        
-
+            <Text style={textStyles.smallTitleText}>Select information</Text>
+            <MultiSelectComponent items={items}></MultiSelectComponent>
+ 
+            {/* TODO: FIX THIS SHIT PERKELE  */}
+            {/* {tempSelected == String &&
+                <Text>TJoNG</Text>
+            } */}
 
 
         </View>
