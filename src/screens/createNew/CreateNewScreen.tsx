@@ -1,41 +1,89 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Text, View } from "react-native";
 import { textStyles } from "../../styles";
 import MultiSelectComponent from "../../components/MultiSelectComponent";
 import { items } from "../../propertyInfoSelection";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import CreateProperty from "../../features/CreateProperty"
+import { ReadItem } from "../../features/storage"
 
-const getSelected = async(): Promise<string | undefined> => {
-    try {
-        const value = await AsyncStorage.getItem("tempSelected")
-        if (value !== null) {
-            console.log(typeof(value))
-            return value
-        } else {
-            console.log("No value")
-        }
-    }
-    catch (error) {
+// const selectedItems = (): Promise<void | Element | null> => {
+//     return (
+//         AsyncStorage.getItem("tempSelected").then(
+//             value => {
+//                 if (value) {
+//                     return (
+//                         <View>
+//                             <Text>POW</Text>
+//                         </View>
+//                     )
+//                 } else {
+//                     return null
+//                 }
+//             }
+//         ).catch(error => {
+//             console.log("Error at selectedItems: ", error)
+//         })
+//     )
+// }
 
-    }
+const TestComp = () => {
+    
+    // Move to CreateProperty.tsx
+    const [selectedItems, setSelctedItems] = useState()
+
+    // FIx this stuff so it doesnt infinite loop
+    const setItems = useCallback(() => {
+        ReadItem("tempSelected").then(res => {
+            if (res) {
+                const selected = JSON.parse(res) // Reminder: res = string, JSON.parse(res) = object
+                console.log("selcted in if", typeof(selected))
+                setSelctedItems(selected)
+            } else {
+                console.log("Invalid response from ReadItem")
+            }
+        }).catch(error => {
+            console.log("Failed to readItem", error)
+        })
+    }, [selectedItems])
+    console.log(selectedItems)
+    return (
+        <View>
+            <Text></Text>
+        </View>
+    )
+    
 }
 
-const test = async() => {
-    return await AsyncStorage.getItem("tempSelected")
-}
-
+// Main screen
 const CreateNewScreen: React.FC = () => {
 
-    // To be removed
-    // console.log(AsyncStorage.getItem("test"))
-    // console.log(AsyncStorage.getItem("tempSelected"))
+    const [selectedItems, setSelctedItems] = useState()
 
-    // AsyncStorage.clear()
-    const tempSelected = getSelected
-    console.log(test())
-    console.log(tempSelected())
+    // Move to CreateProperty.tsx
+//     // Works but overloads it, constant refresh
+//     ReadItem("tempSelected").then(res => {
+//         if (res) {
+//             const selected = JSON.parse(res)
+//             console.log("selcted in if", selected)
+//             setSelctedItems(selected)
+//         } else {
+//             console.log("Invalid response from ReadItem")
+//         }
+//     }).catch(error => {
+//         console.log("Failed to readItem", error)
+//     })
 
-    const testVar = "atiogjgi"
+// console.log(selectedItems)
+
+    // console.log(selectedItems)
+    // console.log("Test1 log", test1(AsyncStorage.getItem("tempSelected")))
+    // console.log("straight console asyncstor", AsyncStorage.getItem("tempSelected"))
+    // console.log("Straight from AsyncStorage", typeof (AsyncStorage.getItem("tempSelected")))
+    // console.log(test())
+    // console.log(" Via Test functiuon", test(AsyncStorage.getItem("tempSelected")))
+
+    // const test = selectedItems
 
     return (
         <View>
@@ -43,12 +91,10 @@ const CreateNewScreen: React.FC = () => {
             <Text style={textStyles.titleText}>Create new property</Text>
             <Text style={textStyles.smallTitleText}>Select information</Text>
             <MultiSelectComponent items={items}></MultiSelectComponent>
- 
-            {/* TODO: FIX THIS SHIT PERKELE  */}
-            {/* {tempSelected == String &&
-                <Text>TJoNG</Text>
-            } */}
 
+            {/* TODO: FIX THIS SHIT PERKELE  */}
+            <CreateProperty></CreateProperty>
+            <TestComp></TestComp>
 
         </View>
     )

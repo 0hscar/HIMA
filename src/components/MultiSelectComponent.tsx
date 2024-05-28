@@ -5,6 +5,7 @@ import { dropdownStyles, textStyles } from "../styles";
 import SectionedMultiSelect from "react-native-sectioned-multi-select";
 import { Item } from "../propertyInfoSelection"
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { SaveItem } from "../features/storage";
 
 interface DataProps {
     items: Item[]
@@ -17,7 +18,7 @@ interface ItemCount {
 const MultiSelectComponent: React.FC<DataProps> = ({ items }) => {
     const [selected, setSelected] = useState<Item[]>()
     const [isFocus, setIsFocus] = useState(false)
-    console.log(selected) // To be removed
+
 
     const MultiSelectHeader = () => {
         return (
@@ -33,7 +34,7 @@ const MultiSelectComponent: React.FC<DataProps> = ({ items }) => {
     }
 
     function setSavedSelcted(){
-        AsyncStorage.setItem("tempSelected", JSON.stringify(selected))
+        SaveItem("tempSelected", JSON.stringify(selected)) // To doable to have straight in "onConfirm"
     }
 
     return (
