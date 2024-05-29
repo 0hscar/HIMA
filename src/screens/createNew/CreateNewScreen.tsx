@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import { textStyles } from "../../styles";
 import MultiSelectComponent from "../../components/MultiSelectComponent";
@@ -33,19 +33,7 @@ const TestComp = () => {
     const [selectedItems, setSelctedItems] = useState()
 
     // FIx this stuff so it doesnt infinite loop
-    const setItems = useCallback(() => {
-        ReadItem("tempSelected").then(res => {
-            if (res) {
-                const selected = JSON.parse(res) // Reminder: res = string, JSON.parse(res) = object
-                console.log("selcted in if", typeof(selected))
-                setSelctedItems(selected)
-            } else {
-                console.log("Invalid response from ReadItem")
-            }
-        }).catch(error => {
-            console.log("Failed to readItem", error)
-        })
-    }, [selectedItems])
+    
     console.log(selectedItems)
     return (
         <View>
@@ -58,7 +46,35 @@ const TestComp = () => {
 // Main screen
 const CreateNewScreen: React.FC = () => {
 
-    const [selectedItems, setSelctedItems] = useState()
+    const [selectedItems, setSelctedItems] = useState<object>()
+
+
+    useEffect(() => {
+
+        const setItems = () => {
+            ReadItem("tempSelected").then(res => {
+                if (res) {
+                    const selected = JSON.parse(res) // Reminder: res = string, JSON.parse(res) = object
+                    console.log("selcted in if", typeof(selected))
+                    if (selected != selectedItems) {
+                        console.log("SelectedItems changed")
+                        setSelctedItems(selected)
+                    }
+    
+                } else {
+                    console.log("Invalid response from ReadItem")
+                }
+            }).catch(error => {
+                console.log("Failed to readItem", error)
+            })
+        }
+    
+        setItems()
+
+    }, [selectedItems])
+    
+    // setSelctedItems([401, 202, 301])s
+
 
     // Move to CreateProperty.tsx
 //     // Works but overloads it, constant refresh
@@ -93,8 +109,7 @@ const CreateNewScreen: React.FC = () => {
             <MultiSelectComponent items={items}></MultiSelectComponent>
 
             {/* TODO: FIX THIS SHIT PERKELE  */}
-            <CreateProperty></CreateProperty>
-            <TestComp></TestComp>
+            <CreateProperty items={selectedItems}></CreateProperty>
 
         </View>
     )
