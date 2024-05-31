@@ -1,5 +1,9 @@
 import React from "react"
 import { Text, View } from "react-native"
+import { ReadItem } from "../features/storage"
+
+
+
 interface ItemProps {
     items: Object | undefined
 }
@@ -7,6 +11,9 @@ interface ItemProps {
 const CreateProperty: React.FC<ItemProps> = ({ items }) => {
     
     
+
+
+
     return (
         
         <View>
