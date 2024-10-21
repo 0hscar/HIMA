@@ -15,6 +15,21 @@ const data = [
     {adress: "3rd Street"}
 ]
 
+// Example for screenshot
+interface MyProps {
+    message: string
+}
+
+const MyMessageComponent: React.FC<MyProps> = ({ message }) => {
+    return (
+        <View>
+            <Text>{message}</Text>
+        </View>
+    )
+}
+
+
+
 const PropertyList = () => {
     return (
         <View>
