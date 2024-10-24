@@ -2,115 +2,54 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import { textStyles } from "../../styles";
 import MultiSelectComponent from "../../components/MultiSelectComponent";
-import { items } from "../../propertyInfoSelection";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { HouseInfo } from "../../propertyInfoSelection";
 import CreateProperty from "../../features/CreateProperty"
-import { ReadItem } from "../../features/storage"
+import * as Storage from "../../features/storage"
 
-// const selectedItems = (): Promise<void | Element | null> => {
-//     return (
-//         AsyncStorage.getItem("tempSelected").then(
-//             value => {
-//                 if (value) {
-//                     return (
-//                         <View>
-//                             <Text>POW</Text>
-//                         </View>
-//                     )
-//                 } else {
-//                     return null
-//                 }
-//             }
-//         ).catch(error => {
-//             console.log("Error at selectedItems: ", error)
-//         })
-//     )
-// }
-
-const TestComp = () => {
-    
-    // Move to CreateProperty.tsx
-    const [selectedItems, setSelctedItems] = useState()
-
-    // FIx this stuff so it doesnt infinite loop
-    
-    console.log(selectedItems)
-    return (
-        <View>
-            <Text></Text>
-        </View>
-    )
-    
-}
 
 // Main screen
 const CreateNewScreen: React.FC = () => {
 
     const [selectedItems, setSelctedItems] = useState<object>()
+    const [testItems, setTestItems] = useState<string | undefined>()
 
-
+    // Storage.getItems at Home page to view owned properties.
+    // Storage.setItems at CreateProperty.tsx
+    
+    // Testing stuff?
+    // Fetches items IDs
     useEffect(() => {
+        loadItems()
+    }, [])
 
-        const setItems = () => {
-            ReadItem("tempSelected").then(res => {
-                if (res) {
-                    const selected = JSON.parse(res) // Reminder: res = string, JSON.parse(res) = object
-                    console.log("selcted in if", typeof(selected))
-                    if (selected != selectedItems) {
-                        console.log("SelectedItems changed")
-                        setSelctedItems(selected)
-                    }
-    
-                } else {
-                    console.log("Invalid response from ReadItem")
-                }
-            }).catch(error => {
-                console.log("Failed to readItem", error)
-            })
+    const loadItems = async () => {
+        try {
+            const storedItem = await Storage.getItem("tempSelected")
+            if (storedItem !== null) {
+                setTestItems(storedItem)
+            }
+        } catch (error) {
+            console.log("Failed to load items", error)
         }
+    }
     
-        setItems()
-
-    }, [selectedItems])
-    
-    // setSelctedItems([401, 202, 301])s
-
-
-    // Move to CreateProperty.tsx
-//     // Works but overloads it, constant refresh
-//     ReadItem("tempSelected").then(res => {
-//         if (res) {
-//             const selected = JSON.parse(res)
-//             console.log("selcted in if", selected)
-//             setSelctedItems(selected)
-//         } else {
-//             console.log("Invalid response from ReadItem")
-//         }
-//     }).catch(error => {
-//         console.log("Failed to readItem", error)
-//     })
-
-// console.log(selectedItems)
-
-    // console.log(selectedItems)
-    // console.log("Test1 log", test1(AsyncStorage.getItem("tempSelected")))
-    // console.log("straight console asyncstor", AsyncStorage.getItem("tempSelected"))
-    // console.log("Straight from AsyncStorage", typeof (AsyncStorage.getItem("tempSelected")))
-    // console.log(test())
-    // console.log(" Via Test functiuon", test(AsyncStorage.getItem("tempSelected")))
-
-    // const test = selectedItems
+    console.log(testItems)
 
     return (
         <View>
             {/* TODO: Create components */}
             <Text style={textStyles.titleText}>Create new property</Text>
             <Text style={textStyles.smallTitleText}>Select information</Text>
-            <MultiSelectComponent items={items}></MultiSelectComponent>
+            <MultiSelectComponent items={HouseInfo}></MultiSelectComponent>
 
-            {/* TODO: FIX THIS SHIT PERKELE  */}
+            {/* Storage works, pass selected items to CreateProperty and there save the completed property to Storage */}
+
             <CreateProperty items={selectedItems}></CreateProperty>
+            
+            <Text>{testItems}</Text> 
+            {/* This works, show it at home screen or something to see owned property */} 
 
+        
         </View>
     )
 }

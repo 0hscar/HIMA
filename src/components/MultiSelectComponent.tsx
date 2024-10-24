@@ -4,8 +4,7 @@ import Icon from "react-native-vector-icons/MaterialIcons"
 import { dropdownStyles, textStyles } from "../styles";
 import SectionedMultiSelect from "react-native-sectioned-multi-select";
 import { Item } from "../propertyInfoSelection"
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { SaveItem } from "../features/storage";
+import * as Storage from "../features/storage"
 
 interface DataProps {
     items: Item[]
@@ -34,7 +33,8 @@ const MultiSelectComponent: React.FC<DataProps> = ({ items }) => {
     }
 
     function setSavedSelcted(){
-        SaveItem("tempSelected", JSON.stringify(selected)) // To doable to have straight in "onConfirm"
+        Storage.setItem("tempSelected", JSON.stringify(selected)) // To doable to have straight in "onConfirm"
+        console.log(selected)
     }
 
     return (
@@ -42,7 +42,7 @@ const MultiSelectComponent: React.FC<DataProps> = ({ items }) => {
             items={items}
             IconRenderer={Icon} // TODO FIX
             // style={[dropdownStyles.multiSelect]}
-            uniqueKey="id"
+            uniqueKey="name" //From Item select what to save in the array for storage, name -> "Freezer"
             modalAnimationType="slide"
             colors={{ primary: '#c98422' }}
             hideSearch={true}

@@ -1,19 +1,21 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
+import { Alert } from "react-native"
 
-export const SaveItem = async (key: string, value: string) => {
+export const setItem = async (key: string, value: string) => {
     try {
         await AsyncStorage.setItem(key, value)
-        console.log("saved")
+        Alert.alert("Success", "Saved successfully")
+        console.log("Item Set")
     } catch (error) {
-        console.log("Save item error", error)
+        console.log("Set item error", error)
     }
 }
 
-export const ReadItem = async (key: any) => {
+export const getItem = async (key: any) => {
     try {
         const result = await AsyncStorage.getItem(key)
-        return result
+        return result != null ? JSON.parse(result) : null //Parse it array
     } catch (error) {
-        console.log("Read item error", error)
+        console.log("Get item error", error)
     }
 }

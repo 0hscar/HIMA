@@ -1,6 +1,5 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Text, View } from "react-native"
-import { ReadItem } from "../features/storage"
 
 
 
@@ -10,9 +9,6 @@ interface ItemProps {
 // TODO: create the creator with selected valeus
 const CreateProperty: React.FC<ItemProps> = ({ items }) => {
     
-    
-
-
 
     return (
         

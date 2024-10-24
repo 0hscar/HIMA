@@ -1,5 +1,5 @@
-
-export const selectableData = { // Redundant?
+// Redundant?
+export const selectableData = { 
     basicInformation: [
         { label: "Address", value: "Address"},
         { label: "Register Number", value: "Register Number"},
@@ -49,7 +49,7 @@ export interface Item {
     items: SubItem[]
 }
 
-export const items: Item[] = [
+export const HouseInfo: Item[] = [
     { name: "Basic Information", id: 1,
         items: [
             { name: "Address", id: 100 },
