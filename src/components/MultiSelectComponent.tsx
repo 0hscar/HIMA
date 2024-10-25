@@ -1,3 +1,5 @@
+// Redundant ATM!
+
 import React, { useState } from "react";
 import { Text, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons"
@@ -32,6 +34,8 @@ const MultiSelectComponent: React.FC<DataProps> = ({ items }) => {
         )
     }
 
+
+    // Might be needed to be used globally
     function setSavedSelcted(){
         Storage.setItem("tempSelected", JSON.stringify(selected)) // To doable to have straight in "onConfirm"
         console.log(selected)
