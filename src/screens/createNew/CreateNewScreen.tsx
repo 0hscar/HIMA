@@ -4,9 +4,6 @@ import { textStyles } from "../../styles";
 import CreateProperty from "../../features/CreateProperty"
 
 
-
-
-
 // Main screen
 const CreateNewScreen: React.FC = () => {
 
@@ -14,17 +11,10 @@ const CreateNewScreen: React.FC = () => {
         <View>
             {/* TODO: Create components */}
             <Text style={textStyles.titleText}>Create new property</Text>
-            <Text style={textStyles.smallTitleText}>Select information</Text>
-            {/* <MultiSelectComponent items={HouseInfo}></MultiSelectComponent> */}
+            <Text style={textStyles.smallTitleTextCenter}>Select information</Text>
 
             {/* Storage works, pass selected items to CreateProperty and there save the completed property to Storage */}
-
             <CreateProperty></CreateProperty>
-            
-            {/* <Text>{testItems}</Text>  */}
-            {/* This works, show it at home screen or something to see owned property */} 
-
-        
         </View>
     )
 }

@@ -1,13 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import AppNavigation from './screens/AppNavigation'
 
 // Location example imports
-import { useEffect, useState } from 'react';
-import * as Location from 'expo-location';
 
 export default function App() {
   return (
@@ -47,18 +43,4 @@ export default function App() {
 // 
 // export default App;
 
-
-
-
-
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 

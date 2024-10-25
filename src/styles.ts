@@ -18,6 +18,13 @@ export const textStyles = StyleSheet.create({
         fontWeight: "bold",
         marginTop: 10
     },
+    smallTitleTextCenter: {
+        fontFamily: "Couchin",
+        fontSize: 20,
+        fontWeight: "bold",
+        marginTop: 10,
+        textAlign: "center"
+    },
     propertyText: {
         fontFamily: "Couchin",
         color: "black",
@@ -31,6 +38,25 @@ export const textStyles = StyleSheet.create({
 
 })
 
+export const buttonStyles = StyleSheet.create({
+    saveButton: {
+        backgroundColor: "#2e7eb8",
+        borderRadius: 5,
+        justifyContent: "center",
+        alignItems: "center",
+        shadowRadius: 5,
+        shadowColor: "#000",
+        shadowOpacity: 0.5,
+
+    },
+    buttonText: {
+        color: "white",
+        fontSize: 20,
+        paddingTop: 10,
+        paddingBottom: 5,
+    }
+})
+
 export const divStyles = StyleSheet.create({
     container: {
         flex: 1,
@@ -39,6 +65,8 @@ export const divStyles = StyleSheet.create({
         padding: 24
     }
 })
+
+
 
 export const dropdownStyles = StyleSheet.create({
     multiSelect: {
@@ -52,7 +80,16 @@ export const dropdownStyles = StyleSheet.create({
     }, 
     multiSelectHeader: {
         height: 24,
-        backgroundColor: "red"
+        backgroundColor: "lightgray",
+
+
+
     },
     
+})
+
+export const NavStyles = StyleSheet.create({
+    navbar: {
+        backgroundColor: "red"
+    }
 })

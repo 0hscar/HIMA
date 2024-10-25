@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react"
-import { Button, Text, TextInput, View } from "react-native"
+import { Button, Pressable, Text, TextInput, View } from "react-native"
 import * as Storage from "../features/storage"
-import { HouseInfo, Item } from "../propertyInfoSelection";
-import { dropdownStyles, textStyles } from "../styles";
+import { HouseInfo } from "../propertyInfoSelection";
+import { buttonStyles, divStyles, dropdownStyles, textStyles } from "../styles";
 import SectionedMultiSelect from "react-native-sectioned-multi-select";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
-
-// interface DataProps {
-//     items: Item[]
-// }
 interface ItemCount {
     itemCount: number | undefined
 }
@@ -35,7 +31,6 @@ const CreateProperty: React.FC<ItemProps> = () => {
             value: ""
         }))
         setToSaveItems(generateItems)
-        // loadSelectedItems()    
     }, [multiSelectItems])
     
 
@@ -49,7 +44,7 @@ const CreateProperty: React.FC<ItemProps> = () => {
     const handleSave = async () => {
         try {
             const dataToSave = {
-                userName: toSaveItems.reduce((acc, item) => {
+                userName: toSaveItems.reduce((acc, item) => { // Set custom "userName" for user
                     acc[item.name] = item.value
                     return acc
                 }, {} as Record<string, string>)
@@ -86,10 +81,9 @@ const CreateProperty: React.FC<ItemProps> = () => {
             <SectionedMultiSelect
                 items={HouseInfo}
                 IconRenderer={Icon} // TODO FIX
-                // style={[dropdownStyles.multiSelect]}
                 uniqueKey="name" //From Item select what to save in the array for storage, name -> "Freezer"
                 modalAnimationType="slide"
-                colors={{ primary: '#c98422' }}
+                colors={{ primary: '#fa883c' }}
                 hideSearch={true}
                 readOnlyHeadings={true}
                 subKey="items"
@@ -99,15 +93,40 @@ const CreateProperty: React.FC<ItemProps> = () => {
                 onSelectedItemsChange={setSelected}
                 selectedItems={selected}
                 onConfirm={setSavedSelcted}
+                styles={{
+                    selectToggle: {
+                        justifyContent: "center",
+                        alignItems: "center",
+                        paddingLeft: 23
+                    },
+                    selectToggleText: {
+                        textAlign: "center"
+                    },
+                    subItemText: {
+                        textAlign: "center",
+                        // justifyContent: "center"
+                    },
+                    selectedSubItemText: {
+                        color: "#fa883c"
+                    },
+                    itemText: {
+                        textAlign: "center",
+                        paddingLeft: 40
+                        
+                    },
+                    confirmText: {
+                        backgroundColor: "#fa883c"
+                    },
+                    
+                }}
                 // TODO: Fix confirm button styling
     
             ></SectionedMultiSelect>
         )
     }
 
-
     return (
-        <View>
+        <View style={divStyles.container}>
             <MultiSelectComponent></MultiSelectComponent>
             {/* FIX STYLING */}
             {toSaveItems.map((item) => (
@@ -120,7 +139,9 @@ const CreateProperty: React.FC<ItemProps> = () => {
                     />
                 </View>
             ))}
-            <Button title="Save" onPress={handleSave}/>
+            <Pressable style={buttonStyles.saveButton} onPress={handleSave}>
+                <Text style={buttonStyles.buttonText}>Save</Text>
+            </Pressable>
         </View>
     )
 }
