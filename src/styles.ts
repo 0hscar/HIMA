@@ -34,6 +34,13 @@ export const textStyles = StyleSheet.create({
     multiSelectFooterText: {
         padding: 12,
         marginTop: 12,
+    },
+    houseTitle: {
+        fontFamily: "sans-serif",
+        fontSize: 20,
+        fontWeight: "bold",
+        marginTop: 10,
+        textAlign: "center",
     }
 
 })

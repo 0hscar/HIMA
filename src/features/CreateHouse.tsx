@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react"
 import { Alert, Platform, Pressable, Text, TextInput, View } from "react-native"
-import * as Storage from "../features/storage"
+import * as Storage from "../functions/storage"
 import { HouseInfo } from "../propertyInfoSelection";
 import { buttonStyles, divStyles, dropdownStyles, textStyles } from "../styles";
 import SectionedMultiSelect from "react-native-sectioned-multi-select";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import { EventEmitter } from "events";
 
 interface ItemCount {
     itemCount: number | undefined
@@ -18,7 +19,7 @@ interface ToSaveInfo {
     name: string
     value: string
 }
-
+const eventEmitter = new EventEmitter()
 // TODO: create the creator with selected valeus
 const CreateProperty: React.FC<ItemProps> = () => {
     const [toSaveItems, setToSaveItems] = useState<ToSaveInfo[]>([])
@@ -51,8 +52,11 @@ const CreateProperty: React.FC<ItemProps> = () => {
                         return acc
                     }, {} as Record<string, string>)
                 }
-                await Storage.setItem("TestHome2", JSON.stringify(dataToSave)) // not currently working
+                await Storage.setItem(propertyName, JSON.stringify(dataToSave)) // not currently working
                 console.log("Web Saved")
+                eventEmitter.emit("houseAdded")
+                setMultiSelectItems([])
+
             } catch (error) {
                 console.log("Error to save data", error)
             }
@@ -64,26 +68,14 @@ const CreateProperty: React.FC<ItemProps> = () => {
                         return acc
                     }, {} as Record<string, string>)
                 }
-                await Storage.setItem("TestHome2", JSON.stringify(dataToSave))
+                await Storage.setItem(propertyName, JSON.stringify(dataToSave))
+                eventEmitter.emit("houseAdded")
+                setMultiSelectItems([])
             } catch (error) {
                 console.log("Error to save data", error)
             }
         }
     }
-
-    //     try {
-    //         const dataToSave = {
-    //             [propertyName]: toSaveItems.reduce((acc, item) => { // Set custom "userName" for user
-    //                 acc[item.name] = item.value
-    //                 return acc
-    //             }, {} as Record<string, string>)
-    //         }
-    //         await Storage.setItem("TestHome2", JSON.stringify(dataToSave))
-    //     } catch (error) {
-    //         console.log("Error to save data", error)
-    //     }
-    // }
-    // Handlers for Textinputs
 
     // Component in the same file to easily uppdate selected items and create the property
     const MultiSelectComponent: React.FC = () => {
@@ -197,8 +189,19 @@ const CreateProperty: React.FC<ItemProps> = () => {
                     console.log("Button pressed") // error checking
                     const address = toSaveItems.find(i => i.name === "Address")
                     console.log("Address found")
-                    if (address) {
-                        if (!address.value || address.value.trim() === "") {
+                    if (!address) { // Otherwise it may be undefined
+                        Alert.alert(
+                            "No address field",
+                            "You have to choose address",
+                            [
+                                {
+                                    text: "OK",
+                                    style: "cancel"
+                                }
+                            ]
+                        )
+                    } else {
+                        if (!address.name || address.value.trim() === "") {
                             Alert.alert(
                                 "Invalid Address",
                                 "Address cannot be empty, please enter a valid address",
@@ -227,12 +230,15 @@ const CreateProperty: React.FC<ItemProps> = () => {
                         }
                     }
 
-                }}
+                }
+
+                }
             >
                 <Text style={buttonStyles.buttonText}>Save</Text>
             </Pressable>
-        </View>
+        </View >
     )
 }
+export { eventEmitter }
 
 export default CreateProperty

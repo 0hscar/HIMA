@@ -1,7 +1,7 @@
 import React from "react";
 import { Platform, Text, View } from "react-native";
 import { textStyles } from "../../styles";
-import CreateProperty from "../../features/CreateProperty"
+import CreateProperty from "../../features/CreateHouse"
 
 
 // Main screen
