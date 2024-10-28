@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 
+
 // TODO: Create solid styling for everything
 export const textStyles = StyleSheet.create({
     baseText: {
@@ -7,7 +8,7 @@ export const textStyles = StyleSheet.create({
     },
     titleText: {
         fontFamily: "sans-serif",
-        fontSize: 30,
+        fontSize: 40,
         fontWeight: "bold",
         marginTop: 20,
         marginLeft: 10
@@ -24,6 +25,18 @@ export const textStyles = StyleSheet.create({
         fontWeight: "bold",
         marginTop: 10,
         textAlign: "center"
+    },
+    houseHeaderText: {
+        fontSize: 20,
+        fontFamily: "sans-serif",
+        fontWeight: "bold",
+
+    },
+    houseDetailsText: {
+        fontFamily: "sans-serif",
+        marginRight: 5,
+        marginBottom: 15,
+
     },
     propertyText: {
         fontFamily: "sans-serif",
@@ -75,10 +88,9 @@ export const divStyles = StyleSheet.create({
 })
 
 
-
 export const dropdownStyles = StyleSheet.create({
     multiSelect: {
-        borderColor: "gray",
+        borderColor: "red",
         borderWidth: 0.5,
         borderRadius: 8,
         paddingHorizontal: 8,
@@ -89,9 +101,37 @@ export const dropdownStyles = StyleSheet.create({
     multiSelectHeader: {
         height: 24,
         backgroundColor: "lightgray",
+    },
+    
+})
 
+export const SectionedMultiSelectStyle = StyleSheet.create({
+    selectToggle: {
+        justifyContent: "center",
+        alignItems: "center",
+        paddingLeft: 23,
+        marginBottom: 20,
+    },
+    selectToggleText: {
+        textAlign: "center",
+        fontSize: 30,
+        
+    },
+    subItemText: {
+        textAlign: "center",
+        fontSize: 20,
+    },
+    selectedSubItemText: {
+        color: "#fa883c"
+    },
+    itemText: {
+        textAlign: "center",
+        paddingLeft: 40,
+        fontSize: 30
 
-
+    },
+    confirmText: {
+        backgroundColor: "#fa883c"
     },
     
 })

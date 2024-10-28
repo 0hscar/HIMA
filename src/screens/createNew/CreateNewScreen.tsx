@@ -11,8 +11,7 @@ const CreateNewScreen: React.FC = () => {
         <View>
             {/* TODO: Create components */}
             {/* Center Titletext */}
-            <Text style={textStyles.titleText}>Create new property</Text>
-            <Text style={textStyles.smallTitleTextCenter}>Select information</Text>
+            <Text style={textStyles.titleText}>Book creation</Text>
 
             {/* Storage works, pass selected items to CreateProperty and there save the completed property to Storage */}
             <CreateProperty />

@@ -33,9 +33,9 @@ const AppNavigation = () => (
             tabBarItemStyle: {                    // Customize each tab item container
                 margin: 5,
                 borderRadius: 10,
-                backgroundColor: '#fa883c',
+                backgroundColor: '#2e7eb8',
             },
-            headerShown: false,                   // Disable the header for all tabs
+            headerShown: true,                   // Disable the header for all tabs
             tabBarShowLabel: true,                // Show or hide the tab labels
             tabBarShowIcon: false,                 // Show or hide the icons
             tabBarLabelPosition: 'below-icon',    // Label position: 'beside-icon' or 'below-icon'
@@ -46,21 +46,10 @@ const AppNavigation = () => (
             component={HomeScreen}
             options={{
                 title: "Home",
-
                 // More stuff here
             }}
 
         />
-
-        <Tab.Screen
-            name="placeholder"
-            component={HomeScreen} //to change
-            options={{
-                title: "placeholder",
-
-            }}
-        />
-
         <Tab.Screen
             name="Create"
             component={CreateNewScreen}

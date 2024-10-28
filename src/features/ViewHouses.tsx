@@ -89,68 +89,67 @@ const ViewHouses: React.FC = () => {
         }
     };
 
-
     return (
         <View >
             {
-            Object.keys(testHouses).map((houseName) => (
-                <View key={houseName} style={{ marginBottom: 15 }}>
-                    <TouchableOpacity
-                        style={{
-                            padding: 10,
-                            backgroundColor: "#f0f0f0",
-                            borderRadius: 5,
-                            justifyContent: "center",
-                        }}
-                        onPress={() => handleHouseClick(houseName)}
-                    >
-                        <Text style={{ fontWeight: 'bold' }}>{houseName}</Text>
-                    </TouchableOpacity>
+                Object.keys(testHouses).map((houseName) => (
+                    <View key={houseName} style={{ marginBottom: 15 }}>
+                        <TouchableOpacity
+                            style={{
+                                padding: 10,
+                                backgroundColor: "#f0f0f0",
+                                borderRadius: 5,
+                                justifyContent: "center",
+                            }}
+                            onPress={() => handleHouseClick(houseName)}
+                        >
+                            <Text style={textStyles.houseHeaderText}>{houseName}</Text>
+                        </TouchableOpacity>
 
-                    {visibleHouse === houseName && houseDetails && (
-                        <View style={{ paddingLeft: 10, marginTop: 5 }}>
-                            {houseDetails[houseName] && typeof houseDetails[houseName] === 'object' ? (
-                                Object.entries(houseDetails[houseName]).map(([key, value]) => (
-                                    <View key={key} style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                        {editingField === key ? (
-                                            <>
-                                                <TextInput
-                                                    value={editedValue}
-                                                    onChangeText={setEditedValue}
-                                                    style={{
-                                                        borderWidth: 1,
-                                                        borderColor: '#ccc',
-                                                        padding: 5,
-                                                        flex: 1,
-                                                        marginRight: 5
-                                                    }}
-                                                />
-                                                <Pressable
-                                                    style={buttonStyles.saveButton}
-                                                    onPress={() => handleSaveEdit(houseName)}
-                                                >
-                                                    <Text>Save</Text>
-                                                </Pressable>
-                                            </>
-                                        ) : (
-                                            <>
-                                                <Text style={{ marginRight: 5 }}>
-                                                    {key}: {typeof value === 'string' ? value : 'N/A'}
-                                                </Text>
-                                                <TouchableOpacity onPress={() => handleEditClick(key, typeof value === 'string' ? value : '')}>
-                                                    <Text style={{ color: 'blue' }}>Edit</Text>
-                                                </TouchableOpacity>
-                                            </>
-                                        )}
-                                    </View>
-                                ))
-                            ) : (
-                                <Text>No house details available.</Text>
-                            )}
-                        </View>
-                    )}
-                </View>
-            ))
+                        {visibleHouse === houseName && houseDetails && (
+                            <View style={{ paddingLeft: 10, marginTop: 5 }}>
+                                {houseDetails[houseName] && typeof houseDetails[houseName] === 'object' ? (
+                                    Object.entries(houseDetails[houseName]).map(([key, value]) => (
+                                        <View key={key} style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                            {editingField === key ? (
+                                                <>
+                                                    <TextInput
+                                                        value={editedValue}
+                                                        onChangeText={setEditedValue}
+                                                        style={{
+                                                            borderWidth: 1,
+                                                            borderColor: '#ccc',
+                                                            padding: 5,
+                                                            flex: 1,
+                                                            marginRight: 5
+                                                        }}
+                                                    />
+                                                    <Pressable
+                                                        style={buttonStyles.saveButton}
+                                                        onPress={() => handleSaveEdit(houseName)}
+                                                    >
+                                                        <Text>Save</Text>
+                                                    </Pressable>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <TouchableOpacity onPress={() => handleEditClick(key, typeof value === 'string' ? value : '')}>
+
+                                                        <Text style={textStyles.houseDetailsText}>
+                                                            {key}: {typeof value === 'string' ? value : 'N/A'}
+                                                        </Text>
+                                                    </TouchableOpacity>
+                                                </>
+                                            )}
+                                        </View>
+                                    ))
+                                ) : (
+                                    <Text>No house details available.</Text>
+                                )}
+                            </View>
+                        )}
+                    </View>
+                ))
             }
         </View >
     );

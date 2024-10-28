@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react"
-import { Alert, Platform, Pressable, Text, TextInput, View } from "react-native"
+import { Alert, ScrollView, Platform, Pressable, Text, TextInput, View } from "react-native"
 import * as Storage from "../functions/storage"
 import { HouseInfo } from "../propertyInfoSelection";
-import { buttonStyles, divStyles, dropdownStyles, textStyles } from "../styles";
-import SectionedMultiSelect from "react-native-sectioned-multi-select";
+import { buttonStyles, divStyles, dropdownStyles, textStyles, SectionedMultiSelectStyle } from "../styles";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { EventEmitter } from "events";
+import SectionedMultiSelect from "react-native-sectioned-multi-select";
 
 interface ItemCount {
     itemCount: number | undefined
@@ -100,52 +100,29 @@ const CreateProperty: React.FC<ItemProps> = () => {
 
 
         return (
-            <SectionedMultiSelect
-                items={HouseInfo}
-                IconRenderer={Icon} // TODO FIX
-                uniqueKey="name" //From Item select what to save in the array for storage, name -> "Freezer"
-                modalAnimationType="slide"
-                colors={{ primary: '#fa883c' }}
-                hideSearch={true}
-                readOnlyHeadings={true}
-                subKey="items"
-                close-on-select="false"
-                headerComponent={<MultiSelectHeader />}
-                footerComponent={<MultiSelectFooter itemCount={selected?.length} />}
-                onSelectedItemsChange={setSelected}
-                selectedItems={selected}
-                onConfirm={setSavedSelcted}
-                styles={{ // move to style.ts
-                    selectToggle: {
-                        justifyContent: "center",
-                        alignItems: "center",
-                        paddingLeft: 23,
-                        marginBottom: 20,
-                    },
-                    selectToggleText: {
-                        textAlign: "center"
-                    },
-                    subItemText: {
-                        textAlign: "center",
-                        // justifyContent: "center"
-                    },
-                    selectedSubItemText: {
-                        color: "#fa883c"
-                    },
-                    itemText: {
-                        textAlign: "center",
-                        paddingLeft: 40
+            <ScrollView>
+                <SectionedMultiSelect
+                    items={HouseInfo}
+                    IconRenderer={Icon} // TODO FIX
+                    uniqueKey="name" //From Item select what to save in the array for storage, name -> "Freezer"
+                    modalAnimationType="slide"
+                    colors={{ primary: '#fa883c' }}
+                    hideSearch={false}
+                    readOnlyHeadings={true}
+                    subKey="items"
+                    selectText="Select information"
+                    close-on-select="false"
+                    headerComponent={<MultiSelectHeader />}
+                    footerComponent={<MultiSelectFooter itemCount={selected?.length} />}
+                    onSelectedItemsChange={setSelected}
+                    selectedItems={selected}
+                    onConfirm={setSavedSelcted}
+                    styles={SectionedMultiSelectStyle}
+                // TODO: Fix confirm button styling: EDIT Works on phone 
 
-                    },
-                    confirmText: {
-                        backgroundColor: "#fa883c"
-                    },
+                ></SectionedMultiSelect>
+            </ScrollView>
 
-
-                }}
-            // TODO: Fix confirm button styling
-
-            ></SectionedMultiSelect>
         )
     }
 
@@ -240,5 +217,4 @@ const CreateProperty: React.FC<ItemProps> = () => {
     )
 }
 export { eventEmitter }
-
 export default CreateProperty

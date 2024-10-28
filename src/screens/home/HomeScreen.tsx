@@ -1,7 +1,5 @@
 import React from "react"
 import { Text, View } from "react-native"
-import { StackNavigationProp } from "@react-navigation/stack";
-import { HomeScreenProp } from './types'
 import { textStyles } from "../../styles";
 import ViewHouses from "../../features/ViewHouses";
 
@@ -13,7 +11,7 @@ const HomeScreen: React.FC = () => {
     
     return (
         <View>
-            <Text style={textStyles.titleText}>Properties</Text>
+            <Text style={textStyles.titleText}>Your Homes</Text>
             {/* <PropertyList/> */}
             {/* Needs to be updated without reloading the app */}
             <ViewHouses></ViewHouses>
