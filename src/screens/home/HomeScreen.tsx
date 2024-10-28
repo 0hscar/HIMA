@@ -70,6 +70,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({  }) => {
         <View>
             <Text style={textStyles.titleText}>Properties</Text>
             {/* <PropertyList/> */}
+            {/* Needs to be updated without reloading the app */}
             <Text>{JSON.stringify(loadedHouses)}</Text>
             {/* TODO: Show upcoming expiring date, example: Air filter cleaning in ... */}
             {/* TODO: Create in features the show proporties with limited info until clicked open */}

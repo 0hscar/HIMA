@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Platform, Text, View } from "react-native";
 import { textStyles } from "../../styles";
 import CreateProperty from "../../features/CreateProperty"
 
@@ -11,11 +11,17 @@ const CreateNewScreen: React.FC = () => {
         <View>
             {/* TODO: Create components */}
             {/* Center Titletext */}
-            <Text style={textStyles.titleText}>Create new property</Text> 
+            <Text style={textStyles.titleText}>Create new property</Text>
             <Text style={textStyles.smallTitleTextCenter}>Select information</Text>
 
             {/* Storage works, pass selected items to CreateProperty and there save the completed property to Storage */}
-            <CreateProperty></CreateProperty>
+            <CreateProperty />
+
+            {Platform.OS === 'web' ? (
+                <Text>This is displayed on the web!</Text>
+            ) : (
+                <Text>This should display on mobile!</Text>
+            )}
         </View>
     )
 }

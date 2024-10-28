@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Alert, Button, Pressable, Text, TextInput, View } from "react-native"
+import { Alert, Platform, Pressable, Text, TextInput, View } from "react-native"
 import * as Storage from "../features/storage"
 import { HouseInfo } from "../propertyInfoSelection";
 import { buttonStyles, divStyles, dropdownStyles, textStyles } from "../styles";
@@ -42,18 +42,47 @@ const CreateProperty: React.FC<ItemProps> = () => {
         setToSaveItems(updatedItems)
     }
     const handleSave = async (propertyName: string) => {
-        try {
-            const dataToSave = {
-                [propertyName]: toSaveItems.reduce((acc, item) => { // Set custom "userName" for user
-                    acc[item.name] = item.value
-                    return acc
-                }, {} as Record<string, string>)
+
+        if (Platform.OS === 'web') {
+            try {
+                const dataToSave = {
+                    devName: toSaveItems.reduce((acc, item) => { // Set custom "userName" for user
+                        acc[item.name] = item.value
+                        return acc
+                    }, {} as Record<string, string>)
+                }
+                await Storage.setItem("TestHome2", JSON.stringify(dataToSave)) // not currently working
+                console.log("Web Saved")
+            } catch (error) {
+                console.log("Error to save data", error)
             }
-            await Storage.setItem("TestHome2", JSON.stringify(dataToSave))
-        } catch (error) {
-            console.log("Error to save data", error)
+        } else {
+            try {
+                const dataToSave = {
+                    [propertyName]: toSaveItems.reduce((acc, item) => { // Set custom "userName" for user
+                        acc[item.name] = item.value
+                        return acc
+                    }, {} as Record<string, string>)
+                }
+                await Storage.setItem("TestHome2", JSON.stringify(dataToSave))
+            } catch (error) {
+                console.log("Error to save data", error)
+            }
         }
     }
+
+    //     try {
+    //         const dataToSave = {
+    //             [propertyName]: toSaveItems.reduce((acc, item) => { // Set custom "userName" for user
+    //                 acc[item.name] = item.value
+    //                 return acc
+    //             }, {} as Record<string, string>)
+    //         }
+    //         await Storage.setItem("TestHome2", JSON.stringify(dataToSave))
+    //     } catch (error) {
+    //         console.log("Error to save data", error)
+    //     }
+    // }
     // Handlers for Textinputs
 
     // Component in the same file to easily uppdate selected items and create the property
@@ -76,6 +105,7 @@ const CreateProperty: React.FC<ItemProps> = () => {
         function setSavedSelcted() {
             setMultiSelectItems(selected)
         }
+
 
         return (
             <SectionedMultiSelect
