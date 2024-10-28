@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Button, Pressable, Text, TextInput, View } from "react-native"
+import { Alert, Button, Pressable, Text, TextInput, View } from "react-native"
 import * as Storage from "../features/storage"
 import { HouseInfo } from "../propertyInfoSelection";
 import { buttonStyles, divStyles, dropdownStyles, textStyles } from "../styles";
@@ -32,7 +32,7 @@ const CreateProperty: React.FC<ItemProps> = () => {
         }))
         setToSaveItems(generateItems)
     }, [multiSelectItems])
-    
+
 
     // Handlers for Textinputs
     const handleInputChange = (text: string, id: number) => {
@@ -41,16 +41,16 @@ const CreateProperty: React.FC<ItemProps> = () => {
         )
         setToSaveItems(updatedItems)
     }
-    const handleSave = async () => {
+    const handleSave = async (propertyName: string) => {
         try {
             const dataToSave = {
-                userName: toSaveItems.reduce((acc, item) => { // Set custom "userName" for user
+                [propertyName]: toSaveItems.reduce((acc, item) => { // Set custom "userName" for user
                     acc[item.name] = item.value
                     return acc
                 }, {} as Record<string, string>)
             }
             await Storage.setItem("TestHome2", JSON.stringify(dataToSave))
-        } catch (error){
+        } catch (error) {
             console.log("Error to save data", error)
         }
     }
@@ -59,7 +59,7 @@ const CreateProperty: React.FC<ItemProps> = () => {
     // Component in the same file to easily uppdate selected items and create the property
     const MultiSelectComponent: React.FC = () => {
         const [selected, setSelected] = useState<string[]>([])
-        
+
         const MultiSelectHeader = () => {
             return (
                 <View style={dropdownStyles.multiSelectHeader}></View>
@@ -72,11 +72,11 @@ const CreateProperty: React.FC<ItemProps> = () => {
                 </View>
             )
         }
-    
-        function setSavedSelcted(){
+
+        function setSavedSelcted() {
             setMultiSelectItems(selected)
         }
-    
+
         return (
             <SectionedMultiSelect
                 items={HouseInfo}
@@ -93,11 +93,12 @@ const CreateProperty: React.FC<ItemProps> = () => {
                 onSelectedItemsChange={setSelected}
                 selectedItems={selected}
                 onConfirm={setSavedSelcted}
-                styles={{
+                styles={{ // move to style.ts
                     selectToggle: {
                         justifyContent: "center",
                         alignItems: "center",
-                        paddingLeft: 23
+                        paddingLeft: 23,
+                        marginBottom: 20,
                     },
                     selectToggleText: {
                         textAlign: "center"
@@ -112,15 +113,16 @@ const CreateProperty: React.FC<ItemProps> = () => {
                     itemText: {
                         textAlign: "center",
                         paddingLeft: 40
-                        
+
                     },
                     confirmText: {
                         backgroundColor: "#fa883c"
                     },
-                    
+
+
                 }}
-                // TODO: Fix confirm button styling
-    
+            // TODO: Fix confirm button styling
+
             ></SectionedMultiSelect>
         )
     }
@@ -131,15 +133,72 @@ const CreateProperty: React.FC<ItemProps> = () => {
             {/* FIX STYLING */}
             {toSaveItems.map((item) => (
                 <View key={item.id}>
-                    <Text>{item.name}</Text>
+
+                    <Text style={textStyles.smallTitleText}>{item.name}</Text>
                     <TextInput
-                        // Set style
+                        // Set style, move to style.ts
+                        style={{
+                            height: 35,
+                            borderColor: "#ccc",
+                            borderWidth: 1,
+                            borderRadius: 5,
+
+                        }}
                         value={item.value}
                         onChangeText={(text) => handleInputChange(text, item.id)}
                     />
                 </View>
             ))}
-            <Pressable style={buttonStyles.saveButton} onPress={handleSave}>
+            <Pressable
+                style={buttonStyles.saveButton}
+                onPress={() => {
+                    Alert.alert(
+                        "Test Alert",
+                        "This is a simple test alert.",
+                        [{ text: "OK", onPress: () => console.log("OK Pressed") }]
+                    );
+                }}
+            >
+                <Text style={buttonStyles.buttonText}>Test Alert</Text>
+            </Pressable>
+            <Pressable
+                style={buttonStyles.saveButton}
+                onPress={() => {
+                    console.log("Button pressed") // error checking
+                    const address = toSaveItems.find(i => i.name === "Address")
+                    console.log("Address found")
+                    if (address) {
+                        if (!address.value || address.value.trim() === "") {
+                            Alert.alert(
+                                "Invalid Address",
+                                "Address cannot be empty, please enter a valid address",
+                                [
+                                    {
+                                        text: "OK",
+                                        style: "cancel"
+                                    }
+                                ]
+                            )
+                        } else {
+                            Alert.alert(
+                                "Confirm Save",
+                                "Do you want to save this property at ${address.value}?",
+                                [
+                                    {
+                                        text: "Cancel",
+                                        style: "cancel",
+                                    },
+                                    {
+                                        text: "Save",
+                                        onPress: () => handleSave(address.value),
+                                    }
+                                ]
+                            )
+                        }
+                    }
+
+                }}
+            >
                 <Text style={buttonStyles.buttonText}>Save</Text>
             </Pressable>
         </View>

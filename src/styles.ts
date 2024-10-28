@@ -3,30 +3,30 @@ import { StyleSheet } from "react-native";
 // TODO: Create solid styling for everything
 export const textStyles = StyleSheet.create({
     baseText: {
-        fontFamily: "Couchin"
+        fontFamily: "sans-serif"
     },
     titleText: {
-        fontFamily: "Couchin",
+        fontFamily: "sans-serif",
         fontSize: 30,
         fontWeight: "bold",
         marginTop: 20,
         marginLeft: 10
     },
     smallTitleText: {
-        fontFamily: "Couchin",
+        fontFamily: "sans-serif",
         fontSize: 20,
         fontWeight: "bold",
         marginTop: 10
     },
     smallTitleTextCenter: {
-        fontFamily: "Couchin",
+        fontFamily: "sans-serif",
         fontSize: 20,
         fontWeight: "bold",
         marginTop: 10,
         textAlign: "center"
     },
     propertyText: {
-        fontFamily: "Couchin",
+        fontFamily: "sans-serif",
         color: "black",
         marginTop: 10,
 
@@ -47,6 +47,7 @@ export const buttonStyles = StyleSheet.create({
         shadowRadius: 5,
         shadowColor: "#000",
         shadowOpacity: 0.5,
+        marginTop: 5,
 
     },
     buttonText: {
