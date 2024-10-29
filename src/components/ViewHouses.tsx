@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Pressable, Text, TextInput, TouchableOpacity, View } from "react-native"
 import { buttonStyles, textStyles } from "../styles"
 import * as Storage from "../functions/storage"
-import { eventEmitter } from "../features/CreateHouse"
+import { eventEmitter } from "./CreateHouse"
 
 const ViewHouses: React.FC = () => {
     const [testHouses, setTestHouses] = useState<{ [key: string]: string | null }>({});

@@ -1,7 +1,7 @@
 import React from "react"
 import { Text, View } from "react-native"
 import { textStyles } from "../../styles";
-import ViewHouses from "../../features/ViewHouses";
+import ViewHouses from "../../components/ViewHouses";
 
 // interface HomeScreenProps {
 //     navigation: StackNavigationProp<HomeScreenProp>
