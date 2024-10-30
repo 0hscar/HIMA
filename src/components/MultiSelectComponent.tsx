@@ -5,7 +5,7 @@ import { Text, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons"
 import { dropdownStyles, textStyles } from "../styles";
 import SectionedMultiSelect from "react-native-sectioned-multi-select";
-import { Item } from "../propertyInfoSelection"
+import { Item } from "../houseInfoSelection"
 import * as Storage from "../functions/storage"
 
 interface DataProps {

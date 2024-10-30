@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Alert, ScrollView, Platform, Pressable, Text, TextInput, View } from "react-native"
 import * as Storage from "../functions/storage"
-import { HouseInfo } from "../propertyInfoSelection";
+import { HouseInfo } from "../houseInfoSelection";
 import { buttonStyles, divStyles, dropdownStyles, textStyles, SectionedMultiSelectStyle } from "../styles";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { EventEmitter } from "events";
@@ -144,6 +144,7 @@ const CreateProperty: React.FC<ItemProps> = () => {
 
                         }}
                         value={item.value}
+                        placeholder="Model / Name / "
                         onChangeText={(text) => handleInputChange(text, item.id)}
                     />
                 </View>
