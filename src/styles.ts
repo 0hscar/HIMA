@@ -1,4 +1,19 @@
+// // style.ts
 import { StyleSheet } from "react-native";
+
+// export const textStyles = StyleSheet.create({
+//     titleText: {
+//         fontFamily: "sans-serif",
+//         fontSize: 40,
+//         fontWeight: "bold",
+//     },
+//     smallTitleText: {
+//         fontFamily: "sans-serfi",
+//         fontSize: 20,
+//         fontWeight: "bold",
+//     },
+// })
+
 
 
 // TODO: Create solid styling for everything

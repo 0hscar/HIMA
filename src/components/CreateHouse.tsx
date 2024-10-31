@@ -130,37 +130,31 @@ const CreateProperty: React.FC<ItemProps> = () => {
         <View style={divStyles.container}>
             <MultiSelectComponent></MultiSelectComponent>
             {/* FIX STYLING */}
-            {toSaveItems.map((item) => (
-                <View key={item.id}>
+            {/* FIX SO SCROLLING WORKS PROPERLY */}
+            <ScrollView> 
+                {toSaveItems.map((item) => (
+                    <View key={item.id}>
 
-                    <Text style={textStyles.smallTitleText}>{item.name}</Text>
-                    <TextInput
-                        // Set style, move to style.ts
-                        style={{
-                            height: 35,
-                            borderColor: "#ccc",
-                            borderWidth: 1,
-                            borderRadius: 5,
+                        <Text style={textStyles.smallTitleText}>{item.name}</Text>
+                        <TextInput
+                            // Set style, move to style.ts
+                            style={{
+                                height: 35,
+                                borderColor: "#ccc",
+                                borderWidth: 1,
+                                borderRadius: 5,
 
-                        }}
-                        value={item.value}
-                        placeholder="Model / Name / "
-                        onChangeText={(text) => handleInputChange(text, item.id)}
-                    />
-                </View>
-            ))}
-            <Pressable
-                style={buttonStyles.saveButton}
-                onPress={() => {
-                    Alert.alert(
-                        "Test Alert",
-                        "This is a simple test alert.",
-                        [{ text: "OK", onPress: () => console.log("OK Pressed") }]
-                    );
-                }}
-            >
-                <Text style={buttonStyles.buttonText}>Test Alert</Text>
-            </Pressable>
+                            }}
+                            value={item.value}
+                            placeholder="Model / Name / "
+                            onChangeText={(text) => handleInputChange(text, item.id)}
+                        />
+
+                    </View>
+
+                ))}
+            </ScrollView>
+
             <Pressable
                 style={buttonStyles.saveButton}
                 onPress={() => {

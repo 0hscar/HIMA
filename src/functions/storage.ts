@@ -14,7 +14,7 @@ export const setItem = async (key: string, value: string) => {
 export const getItem = async (key: any) => {
     try {
         const result = await AsyncStorage.getItem(key)
-        return result != null ? JSON.parse(result) : null //Parse it array
+        return result != null ? JSON.parse(result) : null //Parse it Object
     } catch (error) {
         console.log("Get item error", error)
     }
