@@ -9,14 +9,9 @@ import {
 import { buttonStyles, textStyles } from "../styles";
 import * as Storage from "../functions/storage";
 import { eventEmitter } from "./CreateHouse";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { RootStackParamList } from "../screens/AppNavigation";
-import { HomeScreenNavigationProp } from "../screens/home/HomeScreen";
+import { HomeScreenNavigationProp } from "../screens/home/types";
 
-type ViewHousesNavigationProps = StackNavigationProp<
-  RootStackParamList,
-  "MainTabs"
->;
+// TODO: Move to seperate types.ts?
 
 type ViewHousesProps = {
   navigation: HomeScreenNavigationProp;
@@ -59,11 +54,26 @@ const ViewHouses: React.FC<ViewHousesProps> = ({ navigation }) => {
   const handleHouseClick = (houseName: string) => {
     console.log("House ", houseName, "Clicked");
     // Doesnt close previous and open the newly clicked at the same time
-    if (visibleHouse) {
-      setVisibleHouse(null);
-    } else {
-      setVisibleHouse(houseName);
+    const houseData = testHouses[houseName];
+
+    if (houseData) {
+      try {
+        const parsedHouseData = JSON.parse(houseData);
+
+        navigation.navigate("HouseDetails", {
+          houseName: houseName,
+          houseData: parsedHouseData,
+        });
+      } catch (error) {
+        console.error("Error parsing house data:", error);
+      }
     }
+
+    // if (visibleHouse) {
+    //   setVisibleHouse(null);
+    // } else {
+    //   setVisibleHouse(houseName);
+    // }
 
     // Parse the JSON string to get house details
     const houseDataString = testHouses[houseName];
@@ -80,11 +90,12 @@ const ViewHouses: React.FC<ViewHousesProps> = ({ navigation }) => {
     }
   };
 
+  // TO BE MOVED
   const handleEditClick = (key: string, value: string) => {
     setEditingField(key);
     setEditedValue(value);
   };
-
+  // TO BE MOVED
   const handleSaveEdit = (houseName: string) => {
     if (houseDetails && editingField) {
       // Update the house details with the edited value
@@ -123,70 +134,12 @@ const ViewHouses: React.FC<ViewHousesProps> = ({ navigation }) => {
           >
             <Text style={textStyles.houseHeaderText}>{houseName}</Text>
           </TouchableOpacity>
-
-          {visibleHouse === houseName && houseDetails && (
-            <View style={{ paddingLeft: 10, marginTop: 5 }}>
-              {houseDetails[houseName] &&
-              typeof houseDetails[houseName] === "object" ? (
-                Object.entries(houseDetails[houseName]).map(([key, value]) => (
-                  <View
-                    key={key}
-                    style={{ flexDirection: "row", alignItems: "center" }}
-                  >
-                    {editingField === key ? (
-                      <>
-                        <TextInput
-                          value={editedValue}
-                          onChangeText={setEditedValue}
-                          style={{
-                            borderWidth: 1,
-                            borderColor: "#ccc",
-                            padding: 5,
-                            flex: 1,
-                            marginRight: 5,
-                          }}
-                        />
-                        <Pressable
-                          style={buttonStyles.saveButton}
-                          onPress={() => handleSaveEdit(houseName)}
-                        >
-                          <Text>Save</Text>
-                        </Pressable>
-                      </>
-                    ) : (
-                      <>
-                        <TouchableOpacity
-                          onPress={() =>
-                            handleEditClick(
-                              key,
-                              typeof value === "string" ? value : "",
-                            )
-                          }
-                        >
-                          <Text style={textStyles.houseDetailsText}>
-                            {key}: {typeof value === "string" ? value : "N/A"}
-                          </Text>
-                        </TouchableOpacity>
-                      </>
-                    )}
-                  </View>
-                ))
-              ) : (
-                <Text>No house details available.</Text>
-              )}
-            </View>
-          )}
         </View>
       ))}
+
       {/* TEMPORARY REMOVE ALL */}
       <Pressable style={buttonStyles.saveButton} onPress={Storage.removeAll}>
-        <Text style={buttonStyles.buttonText}>Remove all houses</Text>
-      </Pressable>
-      <Pressable
-        style={buttonStyles.saveButton}
-        onPress={() => navigation.navigate("HouseDetails", { testId: 10 })}
-      >
-        <Text>PressMe</Text>
+        <Text style={buttonStyles.buttonText}>DEV Remove all houses</Text>
       </Pressable>
     </View>
   );

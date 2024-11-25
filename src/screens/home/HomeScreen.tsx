@@ -2,20 +2,7 @@ import React from "react";
 import { Text, View } from "react-native";
 import { textStyles } from "../../styles";
 import ViewHouses from "../../components/ViewHouses";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { CompositeNavigationProp } from "@react-navigation/native";
-import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
-import { RootStackParamList, TabParamList } from "../AppNavigation";
-
-// interface HomeScreenProps {
-//     navigation: StackNavigationProp<HomeScreenProp>
-// }
-
-// Move to types.ts
-export type HomeScreenNavigationProp = CompositeNavigationProp<
-  BottomTabNavigationProp<TabParamList, "Home">,
-  StackNavigationProp<RootStackParamList>
->;
+import { HomeScreenNavigationProp } from "./types";
 
 type HomeScreenProps = {
   navigation: HomeScreenNavigationProp;

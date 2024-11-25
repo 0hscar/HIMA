@@ -171,44 +171,58 @@ const CreateHouse: React.FC<ItemProps> = () => {
       <Pressable
         style={buttonStyles.saveButton}
         onPress={() => {
-          console.log("Button pressed"); // error checking
+          console.log("Button pressed");
           const address = toSaveItems.find((i) => i.name === "Address");
           console.log("Address found");
-          if (!address) {
-            // Otherwise it may be undefined
-            Alert.alert("No address field", "You have to choose address", [
-              {
-                text: "OK",
-                style: "cancel",
-              },
-            ]);
-          } else {
+
+          if (Platform.OS === "web") {
+            // WEB SAVE, Alerts doesn't work on web
+            if (!address) {
+              console.log("No address field");
+              return;
+            }
             if (!address.name || address.value.trim() === "") {
-              Alert.alert(
-                "Invalid Address",
-                "Address cannot be empty, please enter a valid address",
-                [
-                  {
-                    text: "OK",
-                    style: "cancel",
-                  },
-                ],
-              );
+              console.log("Invalid address");
+              return;
+            }
+            handleSave(address.value);
+          } else {
+            // MOBILE SAVE, with alerts
+            if (!address) {
+              Alert.alert("No address field", "You have to choose address", [
+                {
+                  text: "OK",
+                  style: "cancel",
+                },
+              ]);
             } else {
-              Alert.alert(
-                "Confirm Save",
-                "Do you want to save this property at ${address.value}?",
-                [
-                  {
-                    text: "Cancel",
-                    style: "cancel",
-                  },
-                  {
-                    text: "Save",
-                    onPress: () => handleSave(address.value),
-                  },
-                ],
-              );
+              if (!address.name || address.value.trim() === "") {
+                Alert.alert(
+                  "Invalid Address",
+                  "Address cannot be empty, please enter a valid address",
+                  [
+                    {
+                      text: "OK",
+                      style: "cancel",
+                    },
+                  ],
+                );
+              } else {
+                Alert.alert(
+                  "Confirm Save",
+                  `Do you want to save this property at ${address.value}?`,
+                  [
+                    {
+                      text: "Cancel",
+                      style: "cancel",
+                    },
+                    {
+                      text: "Save",
+                      onPress: () => handleSave(address.value),
+                    },
+                  ],
+                );
+              }
             }
           }
         }}

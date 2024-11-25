@@ -7,7 +7,7 @@ import HouseDetailsScreen from "./houseDetails/HouseDetailsScreen";
 
 export type RootStackParamList = {
   MainTabs: undefined;
-  HouseDetails: { testId: number } | undefined;
+  HouseDetails: { houseName: string; houseData: any } | undefined; //TODO: Define proper data type
 };
 
 export type TabParamList = {
