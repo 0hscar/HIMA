@@ -43,7 +43,6 @@ const HouseDetailsScreen: React.FC<HouseDetailsScreenProps> = ({
     };
   }, [houseName]);
 
-  // TODO: Add remove this house functionality
   return (
     <ScrollView>
       <View style={{ padding: 16 }}>
