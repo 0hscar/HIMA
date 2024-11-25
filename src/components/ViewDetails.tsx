@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text } from "react-native";
 import { DetailsStyles } from "../styles";
+import { eventEmitter } from "./CreateHouse";
 
 interface ViewDetailsProps {
   houseDetails: {
@@ -13,7 +14,6 @@ interface HouseDetail {
 }
 
 const ViewDetails: React.FC<ViewDetailsProps> = ({ houseDetails }) => {
-  console.log(houseDetails);
   return (
     <View>
       {Object.entries(houseDetails).map(([houseName, details]) => (
@@ -33,14 +33,6 @@ const ViewDetails: React.FC<ViewDetailsProps> = ({ houseDetails }) => {
           ))}
         </View>
       ))}
-
-      {/* {Object.entries(houseDetails).map(([key, value]) => (
-        <View key={key}>
-          <Text>
-            {key}: {typeof value === "string" ? value : "N/A"}
-          </Text>
-        </View>
-      ))} */}
     </View>
   );
 };

@@ -172,4 +172,12 @@ export const DetailsStyles = StyleSheet.create({
     flex: 2,
     color: "#333",
   },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ddd",
+    borderRadius: 4,
+    padding: 8,
+    flex: 1,
+    marginLeft: 8,
+  },
 });

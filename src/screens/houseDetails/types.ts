@@ -4,9 +4,9 @@ import { StackNavigationProp } from "@react-navigation/stack";
 
 export type HouseDetailsRouteProp = RouteProp<
   RootStackParamList,
-  "HouseDetails"
+  "HouseInformation"
 >;
 export type HouseDetailsNavigationProp = StackNavigationProp<
   RootStackParamList,
-  "HouseDetails"
+  "HouseInformation"
 >;

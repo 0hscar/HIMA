@@ -60,7 +60,7 @@ const ViewHouses: React.FC<ViewHousesProps> = ({ navigation }) => {
       try {
         const parsedHouseData = JSON.parse(houseData);
 
-        navigation.navigate("HouseDetails", {
+        navigation.navigate("HouseInformation", {
           houseName: houseName,
           houseData: parsedHouseData,
         });
@@ -68,13 +68,6 @@ const ViewHouses: React.FC<ViewHousesProps> = ({ navigation }) => {
         console.error("Error parsing house data:", error);
       }
     }
-
-    // if (visibleHouse) {
-    //   setVisibleHouse(null);
-    // } else {
-    //   setVisibleHouse(houseName);
-    // }
-
     // Parse the JSON string to get house details
     const houseDataString = testHouses[houseName];
     if (houseDataString) {
@@ -87,35 +80,6 @@ const ViewHouses: React.FC<ViewHousesProps> = ({ navigation }) => {
       }
     } else {
       setHouseDetails(null);
-    }
-  };
-
-  // TO BE MOVED
-  const handleEditClick = (key: string, value: string) => {
-    setEditingField(key);
-    setEditedValue(value);
-  };
-  // TO BE MOVED
-  const handleSaveEdit = (houseName: string) => {
-    if (houseDetails && editingField) {
-      // Update the house details with the edited value
-      const updatedHouseDetails = {
-        ...houseDetails[houseName],
-        [editingField]: editedValue,
-      };
-
-      // Save the updated details back to storage
-      const updatedDataToSave = {
-        [houseName]: updatedHouseDetails,
-      };
-
-      Storage.setItem(houseName, JSON.stringify(updatedDataToSave));
-      eventEmitter.emit("houseAdded"); // Emit event to notify others
-
-      // Reset editing states
-      setEditingField(null);
-      setEditedValue("");
-      setHouseDetails(updatedHouseDetails); // Update state to reflect changes
     }
   };
 

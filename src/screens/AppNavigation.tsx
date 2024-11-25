@@ -6,8 +6,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import HouseDetailsScreen from "./houseDetails/HouseDetailsScreen";
 
 export type RootStackParamList = {
-  MainTabs: undefined;
-  HouseDetails: { houseName: string; houseData: any } | undefined; //TODO: Define proper data type
+  HIMA: undefined; // CHANGE TO SOME LOGO AT SOMEPOINT?
+  HouseInformation: { houseName: string; houseData: any }; //TODO: Define proper data type
 };
 
 export type TabParamList = {
@@ -54,7 +54,7 @@ const TabNavigator = () => {
           borderRadius: 10,
           backgroundColor: "#2e7eb8",
         },
-        headerShown: true, // Disable the header for all tabs
+        headerShown: false, // Disable the header for all tabs
         tabBarShowLabel: true, // Show or hide the tab labels
         tabBarShowIcon: false, // Show or hide the icons
         tabBarLabelPosition: "below-icon", // Label position: 'beside-icon' or 'below-icon'
@@ -80,9 +80,9 @@ const TabNavigator = () => {
 };
 
 const AppNavigation = () => (
-  <Stack.Navigator screenOptions={{ headerShown: false }}>
-    <Stack.Screen name="MainTabs" component={TabNavigator} />
-    <Stack.Screen name="HouseDetails" component={HouseDetailsScreen} />
+  <Stack.Navigator screenOptions={{ headerShown: true }}>
+    <Stack.Screen name="HIMA" component={TabNavigator} />
+    <Stack.Screen name="HouseInformation" component={HouseDetailsScreen} />
   </Stack.Navigator>
 
   // <Tab.Navigator
