@@ -1,9 +1,9 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import HomeScreen from "./home/HomeScreen";
-import CreateNewScreen from "./createNew/CreateNewScreen";
+import HomeScreen from "../screens/home/HomeScreen";
+import CreateNewScreen from "../screens/createNew/CreateNewScreen";
 import { createStackNavigator } from "@react-navigation/stack";
-import HouseDetailsScreen from "./houseDetails/HouseDetailsScreen";
+import HouseDetailsScreen from "../screens/houseDetails/HouseDetailsScreen";
 import { RootStackParamList, TabParamList } from "../types/navigation";
 
 const Tab = createBottomTabNavigator<TabParamList>();
