@@ -9,8 +9,20 @@ import {
 import { buttonStyles, textStyles } from "../styles";
 import * as Storage from "../functions/storage";
 import { eventEmitter } from "./CreateHouse";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../screens/AppNavigation";
+import { HomeScreenNavigationProp } from "../screens/home/HomeScreen";
 
-const ViewHouses: React.FC = () => {
+type ViewHousesNavigationProps = StackNavigationProp<
+  RootStackParamList,
+  "MainTabs"
+>;
+
+type ViewHousesProps = {
+  navigation: HomeScreenNavigationProp;
+};
+
+const ViewHouses: React.FC<ViewHousesProps> = ({ navigation }) => {
   const [testHouses, setTestHouses] = useState<{
     [key: string]: string | null;
   }>({});
@@ -169,6 +181,12 @@ const ViewHouses: React.FC = () => {
       {/* TEMPORARY REMOVE ALL */}
       <Pressable style={buttonStyles.saveButton} onPress={Storage.removeAll}>
         <Text style={buttonStyles.buttonText}>Remove all houses</Text>
+      </Pressable>
+      <Pressable
+        style={buttonStyles.saveButton}
+        onPress={() => navigation.navigate("HouseDetails", { testId: 10 })}
+      >
+        <Text>PressMe</Text>
       </Pressable>
     </View>
   );

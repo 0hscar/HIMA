@@ -5,8 +5,18 @@ import CreateNewScreen from "./createNew/CreateNewScreen";
 import { createStackNavigator } from "@react-navigation/stack";
 import HouseDetailsScreen from "./houseDetails/HouseDetailsScreen";
 
-const Tab = createBottomTabNavigator();
-const Stack = createStackNavigator();
+export type RootStackParamList = {
+  MainTabs: undefined;
+  HouseDetails: { testId: number } | undefined;
+};
+
+export type TabParamList = {
+  Home: undefined;
+  Create: undefined;
+};
+
+const Tab = createBottomTabNavigator<TabParamList>();
+const Stack = createStackNavigator<RootStackParamList>();
 
 const TabNavigator = () => {
   return (
