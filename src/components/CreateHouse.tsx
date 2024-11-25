@@ -20,6 +20,11 @@ import {
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { EventEmitter } from "events";
 import SectionedMultiSelect from "react-native-sectioned-multi-select";
+import { CreateNewScreenNavigationProp } from "../types/navigation";
+
+interface CreateHouseProps extends ItemProps {
+  navigation: CreateNewScreenNavigationProp;
+}
 
 interface ItemCount {
   itemCount: number | undefined;
@@ -35,7 +40,7 @@ interface ToSaveInfo {
 }
 const eventEmitter = new EventEmitter();
 // TODO: create the creator with selected valeus
-const CreateHouse: React.FC<ItemProps> = () => {
+const CreateHouse: React.FC<CreateHouseProps> = ({ navigation }) => {
   //TODO: CHANGE NAME TO SAME AS FILE
   const [toSaveItems, setToSaveItems] = useState<ToSaveInfo[]>([]);
   const [multiSelectItems, setMultiSelectItems] = useState<string[]>([]);
@@ -71,6 +76,8 @@ const CreateHouse: React.FC<ItemProps> = () => {
       await Storage.setItem(propertyName, JSON.stringify(dataToSave));
       eventEmitter.emit("houseAdded");
       setMultiSelectItems([]);
+
+      navigation.navigate("Home");
     } catch (error) {
       console.log("Error to save data", error);
     }
@@ -189,7 +196,7 @@ const CreateHouse: React.FC<ItemProps> = () => {
               } else {
                 Alert.alert(
                   "Confirm Save",
-                  `Do you want to save this property at ${address.value}?`,
+                  `Do you want to save this house at ${address.value}?`,
                   [
                     {
                       text: "Cancel",

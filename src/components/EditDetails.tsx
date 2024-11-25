@@ -55,7 +55,7 @@ const EditDetails: React.FC<EditDetailsProps> = ({ houseDetails, onSave }) => {
         ]);
       }
 
-      eventEmitter.emit("houseAdded"); // Trigger refresh of house list
+      eventEmitter.emit("houseEdited"); // Trigger refresh of house list
     } catch (error) {
       console.error("Error saving changes:", error);
       if (Platform.OS === "web") {

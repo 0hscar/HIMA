@@ -2,11 +2,7 @@ import React from "react";
 import { Text, View } from "react-native";
 import { textStyles } from "../../styles";
 import ViewHouses from "../../components/ViewHouses";
-import { HomeScreenNavigationProp } from "./types";
-
-type HomeScreenProps = {
-  navigation: HomeScreenNavigationProp;
-};
+import { HomeScreenProps } from "../../types/navigation";
 
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   return (

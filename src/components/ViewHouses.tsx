@@ -9,7 +9,7 @@ import {
 import { buttonStyles, textStyles } from "../styles";
 import * as Storage from "../functions/storage";
 import { eventEmitter } from "./CreateHouse";
-import { HomeScreenNavigationProp } from "../screens/home/types";
+import { HomeScreenNavigationProp } from "../types/navigation";
 
 // TODO: Move to seperate types.ts?
 

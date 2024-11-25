@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, Text } from "react-native";
 import { DetailsStyles } from "../styles";
-import { eventEmitter } from "./CreateHouse";
 
 interface ViewDetailsProps {
   houseDetails: {
