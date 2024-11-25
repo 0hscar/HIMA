@@ -57,43 +57,22 @@ const CreateHouse: React.FC<ItemProps> = () => {
     setToSaveItems(updatedItems);
   };
   const handleSave = async (propertyName: string) => {
-    if (Platform.OS === "web") {
-      try {
-        const dataToSave = {
-          devName: toSaveItems.reduce(
-            (acc, item) => {
-              // Set custom "userName" for user
-              acc[item.name] = item.value;
-              return acc;
-            },
-            {} as Record<string, string>,
-          ),
-        };
-        await Storage.setItem(propertyName, JSON.stringify(dataToSave)); // not currently working
-        console.log("Web Saved");
-        eventEmitter.emit("houseAdded");
-        setMultiSelectItems([]);
-      } catch (error) {
-        console.log("Error to save data", error);
-      }
-    } else {
-      try {
-        const dataToSave = {
-          [propertyName]: toSaveItems.reduce(
-            (acc, item) => {
-              // Set custom "userName" for user
-              acc[item.name] = item.value;
-              return acc;
-            },
-            {} as Record<string, string>,
-          ),
-        };
-        await Storage.setItem(propertyName, JSON.stringify(dataToSave));
-        eventEmitter.emit("houseAdded");
-        setMultiSelectItems([]);
-      } catch (error) {
-        console.log("Error to save data", error);
-      }
+    try {
+      const dataToSave = {
+        [propertyName]: toSaveItems.reduce(
+          (acc, item) => {
+            // Set custom "userName" for user
+            acc[item.name] = item.value;
+            return acc;
+          },
+          {} as Record<string, string>,
+        ),
+      };
+      await Storage.setItem(propertyName, JSON.stringify(dataToSave));
+      eventEmitter.emit("houseAdded");
+      setMultiSelectItems([]);
+    } catch (error) {
+      console.log("Error to save data", error);
     }
   };
 
