@@ -11,7 +11,7 @@ export const setItem = async (key: string, value: string) => {
   }
 };
 
-export const getItem = async (key: any) => {
+export const getItem = async (key: string) => {
   try {
     const result = await AsyncStorage.getItem(key);
     return result != null ? JSON.parse(result) : null; //Parse it Object
@@ -55,5 +55,14 @@ export const removeAll = async () => {
     console.log("Removed all houses");
   } catch (error) {
     console.error("Failed to remove all", error);
+  }
+};
+
+export const removeItem = async (key: string) => {
+  try {
+    AsyncStorage.removeItem(key);
+    console.log("Removed ", key, " house");
+  } catch (error) {
+    console.error("Failed to remove house :", key);
   }
 };
