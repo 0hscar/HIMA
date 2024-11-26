@@ -1,96 +1,143 @@
-// Redundant?
-export const selectableData = { 
-    basicInformation: [
-        { label: "Address", value: "Address"},
-        { label: "Register Number", value: "Register Number"},
-        { label: "Year Built", value: "Year Build"},
-        { label: "Square Meters", value: "Square Meters"},
-        { label: "Building material", value: "Building material"},
-        { label: "Roof Material/Construction", value: "Roof Material/Construction"},
-        { label: "Heating", value: "Heating"},
-        { label: "Garage", value: "Garage"},
-
-    ],
-    houseHoldAppliances: [
-        { label: "Fridge", value: "Fridge"},
-        { label: "Freezer", value: "Freezer"},
-        { label: "Oven", value: "Oven"},
-        { label: "Microwave", value: "Microwave"},
-        { label: "Washing Machine", value: "Washing Machine"},
-        { label: "Washing Machine", value: "Washing Machine"},
-        { label: "Dryer", value: "Dryer"},
-        { label: "Vacum/Hoover", value: "Vacum/Hoover"},
-        { label: "Vacum/Hoover", value: "Vacum/Hoover"},
-        // Add more when needed, implement custom items
-    ],
-    serviceNeeds: [
-        { label: "Gutters", value: "Gutters"},
-        { label: "Vacum/Hoover", value: "Vacum/Hoover"},
-        { label: "Air Filters", value: "Air Filters"},
-        { label: "Chimney Sweeping", value: "Chimney Sweeping"},
-    ],
-    onGoingCosts: [
-        { label: "Water", value: "Water"},
-        { label: "Electricity", value: "Electricity"},
-        { label: "Trash?", value: "Trash?"},
-        { label: "Insurances", value: "Insurances"},
-
-    ]
-}
- 
-
 export interface SubItem {
-    name: string
-    id: number
+  name: string;
+  id: number;
+  type?: string;
+  placeholder?: string;
 }
 export interface Item {
-    name: string
-    id: number
-    items: SubItem[]
+  name: string;
+  id: number;
+  items: SubItem[];
 }
 
 export const HouseInfo: Item[] = [
-    { name: "Basic Information", id: 1,
-        items: [
-            { name: "Address", id: 100 },
-            { name: "Register Number", id: 101 },
-            { name: "Year Built", id: 102 },
-            { name: "Square Meters", id: 103 },
-            { name: "Building Material", id: 104 },
-            { name: "Roof Material/Construction", id: 105 },
-            { name: "Heating", id: 106 },
-            { name: "Garage", id: 107 },
-            
-        ]
-    },
-    { name: "Household Appliances", id: 2,
-        items: [
-            { name: "Fridge", id: 200 },
-            { name: "Freezer", id: 201 },
-            { name: "Oven", id: 202 },
-            { name: "Microwave", id: 203 },
-            { name: "Washing Machine", id: 204 },
-            { name: "Dryer", id: 205 },
-            { name: "Vacum/Hoover", id: 206 },
-
-        ]
-    },
-    { name: "Service Needs", id: 3, 
-        items: [
-            { name: "Gutters", id: 300 },
-            { name: "Air Filters", id: 301 },
-            { name: "Chimney Sweeping", id: 302 },
-
-        ]
-    },
-    { name: "On Going Costs", id: 4, 
-        items: [
-            { name: "Water", id: 400 },
-            { name: "Electricity", id: 401 },
-            { name: "Trash", id: 402 },
-            { name: "Insurances", id: 403 },
-
-        ]
-    }
-]
-
+  {
+    name: "Basic Information",
+    id: 1,
+    items: [
+      { name: "Address", id: 100, placeholder: "Enter Address" },
+      {
+        name: "Register number",
+        id: 101,
+        type: "numeric",
+        placeholder: "Enter Registration number",
+      },
+      {
+        name: "Year Built",
+        id: 102,
+        type: "numeric",
+        placeholder: "Enter year built",
+      },
+      {
+        name: "Square Meters",
+        id: 103,
+        type: "numeric",
+        placeholder: "Enter Square meters",
+      },
+      {
+        name: "Building Material",
+        id: 104,
+        placeholder: "Enter Building material",
+      },
+      { name: "Roof Material", id: 105, placeholder: "Enter Roof Material" },
+      { name: "Heating", id: 106, placeholder: "Enter Heating solutions" },
+      {
+        name: "Garage",
+        id: 107,
+        placeholder: "Enter Garage and size in Square meters",
+      },
+    ],
+  },
+  {
+    name: "Household Appliances",
+    id: 2,
+    items: [
+      {
+        name: "Fridge",
+        id: 200,
+        placeholder: "Enter Model / Name / year bought",
+      },
+      {
+        name: "Freezer",
+        id: 201,
+        placeholder: "Enter Model / Name / year bought",
+      },
+      {
+        name: "Oven",
+        id: 202,
+        placeholder: "Enter Model / Name / year bought",
+      },
+      {
+        name: "Microwave",
+        id: 203,
+        placeholder: "Enter Model / Name / year bought",
+      },
+      {
+        name: "Washing Machine",
+        id: 204,
+        placeholder: "Enter Model / Name / year bought",
+      },
+      {
+        name: "Dryer",
+        id: 205,
+        placeholder: "Enter Model / Name / year bought",
+      },
+      {
+        name: "Vacum/Hoover",
+        id: 206,
+        placeholder: "Enter Model / Name / year bought",
+      },
+    ],
+  },
+  {
+    name: "Service Needs",
+    id: 3,
+    items: [
+      {
+        name: "Gutters",
+        id: 300,
+        placeholder: "Enter last cleaned / changed",
+      },
+      {
+        name: "Air Filters",
+        id: 301,
+        placeholder: "Enter last cleaned / changed",
+      },
+      {
+        name: "Chimney Sweeping",
+        id: 302,
+        placeholder: "Enter last cleaned / changed",
+      },
+    ],
+  },
+  {
+    name: "On Going Costs",
+    id: 4,
+    items: [
+      {
+        name: "Water",
+        id: 400,
+        type: "numeric",
+        placeholder: "Enter estimated per month",
+      },
+      {
+        name: "Electricity",
+        id: 401,
+        type: "numeric",
+        placeholder: "Enter estimated per month",
+      },
+      {
+        name: "Trash",
+        id: 402,
+        type: "numeric",
+        placeholder: "Enter estimated per month",
+      },
+      {
+        name: "Insurances",
+        id: 403,
+        type: "numeric",
+        placeholder: "Enter estimated per month",
+      },
+    ],
+  },
+];

@@ -9,13 +9,14 @@ import {
   View,
 } from "react-native";
 import * as Storage from "../functions/storage";
-import { HouseInfo } from "../houseInfoSelection";
+import { HouseInfo, SubItem } from "../houseInfoSelection";
 import {
   buttonStyles,
   divStyles,
   dropdownStyles,
   textStyles,
   SectionedMultiSelectStyle,
+  CreateStyles,
 } from "../styles";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { EventEmitter } from "events";
@@ -37,6 +38,8 @@ interface ToSaveInfo {
   id: number;
   name: string;
   value: string;
+  placeholder?: string;
+  type?: string;
 }
 const eventEmitter = new EventEmitter();
 // TODO: create the creator with selected valeus
@@ -46,40 +49,86 @@ const CreateHouse: React.FC<CreateHouseProps> = ({ navigation }) => {
   const [multiSelectItems, setMultiSelectItems] = useState<string[]>([]);
 
   useEffect(() => {
-    const generateItems = multiSelectItems.map((item, index) => ({
-      id: index + 1,
-      name: item,
-      value: "",
-    }));
-    setToSaveItems(generateItems);
+    const createSaveItems = (selectedNames: string[]) => {
+      return selectedNames.map((selectedName) => {
+        // Find the matching item by searching through all categories and their items
+        let matchingItem: SubItem | undefined;
+
+        // Search through each category
+        HouseInfo.forEach((category) => {
+          const found = category.items.find(
+            (item) => item.name === selectedName,
+          );
+          if (found) {
+            matchingItem = found;
+          }
+        });
+
+        return {
+          id: matchingItem?.id || 0,
+          name: selectedName,
+          value: "",
+          placeholder: matchingItem?.placeholder || "Enter value",
+          type: matchingItem?.type,
+        } as ToSaveInfo;
+      });
+    };
+
+    const generatedItems = createSaveItems(multiSelectItems);
+    setToSaveItems(generatedItems);
   }, [multiSelectItems]);
 
-  // Handlers for Textinputs
   const handleInputChange = (text: string, id: number) => {
-    const updatedItems = toSaveItems.map((item) =>
-      item.id === id ? { ...item, value: text } : item,
+    setToSaveItems((prevItems) =>
+      prevItems.map((item) => {
+        if (item.id === id) {
+          if (item.type === "numeric") {
+            const numericValue = text.replace(/[^0-9.]/g, "");
+            // Only 1 decimal point
+            const validNumeric =
+              numericValue.split(".").length > 2
+                ? numericValue.substring(0, numericValue.lastIndexOf("."))
+                : numericValue;
+            return { ...item, value: validNumeric };
+          }
+          return { ...item, value: text };
+        }
+        return item;
+      }),
     );
-    setToSaveItems(updatedItems);
   };
+
   const handleSave = async (propertyName: string) => {
     try {
+      const hasEmptyRequiredFields = toSaveItems.some((item) => !item.value);
+
+      if (hasEmptyRequiredFields) {
+        Alert.alert("Error", "Please fill in all required fields");
+        return;
+      }
       const dataToSave = {
         [propertyName]: toSaveItems.reduce(
           (acc, item) => {
-            // Set custom "userName" for user
-            acc[item.name] = item.value;
+            // Numeric strings --> numbers
+            if (item.type === "numeric") {
+              acc[item.name] = item.value ? parseFloat(item.value) : 0;
+            } else {
+              acc[item.name] = item.value;
+            }
             return acc;
           },
-          {} as Record<string, string>,
+          {} as Record<string, string | number>,
         ),
       };
+
       await Storage.setItem(propertyName, JSON.stringify(dataToSave));
       eventEmitter.emit("houseAdded");
       setMultiSelectItems([]);
 
       navigation.navigate("Home");
     } catch (error) {
-      console.log("Error to save data", error);
+      console.log("Error saving data", error);
+      Alert.alert("Error", "Failed to save data");
     }
   };
 
@@ -138,16 +187,13 @@ const CreateHouse: React.FC<CreateHouseProps> = ({ navigation }) => {
         {toSaveItems.map((item) => (
           <View key={item.id}>
             <Text style={textStyles.smallTitleText}>{item.name}</Text>
+
             <TextInput
               // Set style, move to style.ts
-              style={{
-                height: 35,
-                borderColor: "#ccc",
-                borderWidth: 1,
-                borderRadius: 5,
-              }}
+              style={CreateStyles.inputField}
               value={item.value}
-              placeholder="Model / Name / "
+              placeholder={item.placeholder || "Enter value"}
+              keyboardType={item.type === "numeric" ? "numeric" : "default"}
               onChangeText={(text) => handleInputChange(text, item.id)}
             />
           </View>

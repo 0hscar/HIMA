@@ -145,6 +145,15 @@ export const NavStyles = StyleSheet.create({
   },
 });
 
+export const CreateStyles = StyleSheet.create({
+  inputField: {
+    height: 35,
+    borderColor: "#ccc",
+    borderWidth: 1,
+    borderRadius: 5,
+  },
+});
+
 export const DetailsStyles = StyleSheet.create({
   detailsContainer: {
     marginBottom: 20,
