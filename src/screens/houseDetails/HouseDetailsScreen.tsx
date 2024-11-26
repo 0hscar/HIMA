@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, ScrollView, Alert } from "react-native";
-import { textStyles, DetailsStyles, buttonStyles } from "../../styles";
+import { Text, View, ScrollView, Alert, SafeAreaView } from "react-native";
+import {
+  textStyles,
+  DetailsStyles,
+  buttonStyles,
+  screenStyles,
+} from "../../styles";
 import { Pressable } from "react-native";
 import ViewDetails from "../../components/ViewDetails";
 import EditDetails from "../../components/EditDetails";
@@ -44,65 +49,67 @@ const HouseDetailsScreen: React.FC<HouseDetailsScreenProps> = ({
   }, [houseName]);
 
   return (
-    <ScrollView>
-      <View style={{ padding: 16 }}>
-        {isEditing ? (
-          <EditDetails
-            houseDetails={houseData}
-            onSave={() => {
-              setIsEditing(false);
-              fetchHouseData();
-              // Optionally refresh the data or navigate back
-            }}
-          />
-        ) : (
-          <ViewDetails houseDetails={currentHouseDetails} />
-        )}
-        <Pressable
-          style={buttonStyles.saveButton}
-          onPress={() => setIsEditing(!isEditing)}
-        >
-          <Text style={buttonStyles.buttonText}>
-            {isEditing ? "Cancel Editing" : "Edit Details"}
-          </Text>
+    <SafeAreaView style={screenStyles.safeArea}>
+      <ScrollView>
+        <View style={{ padding: 16 }}>
+          {isEditing ? (
+            <EditDetails
+              houseDetails={houseData}
+              onSave={() => {
+                setIsEditing(false);
+                fetchHouseData();
+                // Optionally refresh the data or navigate back
+              }}
+            />
+          ) : (
+            <ViewDetails houseDetails={currentHouseDetails} />
+          )}
+          <Pressable
+            style={buttonStyles.editButton}
+            onPress={() => setIsEditing(!isEditing)}
+          >
+            <Text style={buttonStyles.buttonText}>
+              {isEditing ? "Cancel Editing" : "Edit Details"}
+            </Text>
+          </Pressable>
+        </View>
+        <Pressable onPress={() => navigation.goBack()}>
+          <Text>DEV Go back</Text>
         </Pressable>
-      </View>
-      <Pressable onPress={() => navigation.goBack()}>
-        <Text>DEV Go back</Text>
-      </Pressable>
-      <Pressable
-        style={buttonStyles.saveButton}
-        onPress={() => {
-          console.log("Delete button pressed");
-          if (Platform.OS === "web") {
-            Storage.removeItem(houseName);
-            navigation.goBack();
-            eventEmitter.emit("houseAdded");
-          } else {
-            Alert.alert(
-              "Confirm Delete",
-              "Are you sure you want to delete this house?",
-              [
-                {
-                  text: "Cancel",
-                  style: "cancel",
-                },
-                {
-                  text: "Save",
-                  onPress: () => {
-                    Storage.removeItem(houseName);
-                    eventEmitter.emit("houseAdded");
-                    navigation.goBack();
+        <Pressable
+          style={buttonStyles.deleteButton}
+          onPress={() => {
+            console.log("Delete button pressed");
+            if (Platform.OS === "web") {
+              Storage.removeItem(houseName);
+              navigation.goBack();
+              eventEmitter.emit("houseAdded");
+            } else {
+              Alert.alert(
+                "Confirm Delete",
+                "Are you sure you want to delete this house?",
+                [
+                  {
+                    text: "Cancel",
+                    style: "cancel",
                   },
-                },
-              ],
-            );
-          }
-        }}
-      >
-        <Text style={buttonStyles.buttonText}>Delete</Text>
-      </Pressable>
-    </ScrollView>
+                  {
+                    text: "Save",
+                    onPress: () => {
+                      Storage.removeItem(houseName);
+                      eventEmitter.emit("houseAdded");
+                      navigation.goBack();
+                    },
+                  },
+                ],
+              );
+            }
+          }}
+        >
+          <Text style={buttonStyles.buttonText}>Delete</Text>
+        </Pressable>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 

@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { buttonStyles, textStyles } from "../styles";
+import { buttonStyles, listStyles, textStyles } from "../styles";
 import * as Storage from "../functions/storage";
 import { eventEmitter } from "./CreateHouse";
 import { HomeScreenNavigationProp } from "../types/navigation";
@@ -88,21 +88,16 @@ const ViewHouses: React.FC<ViewHousesProps> = ({ navigation }) => {
       {Object.keys(testHouses).map((houseName) => (
         <View key={houseName} style={{ marginBottom: 15 }}>
           <TouchableOpacity
-            style={{
-              padding: 10,
-              backgroundColor: "#f0f0f0",
-              borderRadius: 5,
-              justifyContent: "center",
-            }}
+            style={listStyles.item}
             onPress={() => handleHouseClick(houseName)}
           >
-            <Text style={textStyles.houseHeaderText}>{houseName}</Text>
+            <Text style={listStyles.itemTitle}>{houseName}</Text>
           </TouchableOpacity>
         </View>
       ))}
 
       {/* TEMPORARY REMOVE ALL */}
-      <Pressable style={buttonStyles.saveButton} onPress={Storage.removeAll}>
+      <Pressable style={buttonStyles.deleteButton} onPress={Storage.removeAll}>
         <Text style={buttonStyles.buttonText}>DEV Remove all houses</Text>
       </Pressable>
     </View>
