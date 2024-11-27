@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, Text } from "react-native";
-import { DetailsStyles } from "../styles";
+import { DetailsStyles, screenStyles } from "../styles";
 
 interface ViewDetailsProps {
   houseDetails: {

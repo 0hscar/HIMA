@@ -18,6 +18,7 @@ import {
   CreateStyles,
   SectionedMultiSelectStyle,
   futureColors,
+  screenStyles,
 } from "../styles";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { EventEmitter } from "events";
@@ -142,7 +143,7 @@ const CreateHouse: React.FC<CreateHouseProps> = ({ navigation }) => {
     };
     const MultiSelectFooter: React.FC<ItemCount> = ({ itemCount }) => {
       return (
-        <View>
+        <View style={{ backgroundColor: futureColors.primary }}>
           <Text style={SectionedMultiSelectStyle.headerText}>
             {itemCount} Item(s) selected
           </Text>
@@ -155,38 +156,38 @@ const CreateHouse: React.FC<CreateHouseProps> = ({ navigation }) => {
     }
 
     return (
-      <ScrollView>
-        <SectionedMultiSelect
-          items={HouseInfo}
-          IconRenderer={Icon as any} // TODO FIX properly
-          uniqueKey="name" //From Item select what to save in the array for storage, name -> "Freezer"
-          modalAnimationType="slide"
-          // colors={{ primary: "black" }}
-          hideSearch={false}
-          readOnlyHeadings={true}
-          subKey="items"
-          selectText="Select information"
-          close-on-select="false"
-          headerComponent={<MultiSelectHeader />}
-          footerComponent={<MultiSelectFooter itemCount={selected?.length} />}
-          onSelectedItemsChange={setSelected}
-          selectedItems={selected}
-          onConfirm={setSavedSelcted}
-          styles={SectionedMultiSelectStyle}
-          // TODO: Fix confirm button styling: EDIT Works on phone
-        ></SectionedMultiSelect>
-      </ScrollView>
+      <SectionedMultiSelect
+        items={HouseInfo}
+        IconRenderer={Icon as any} // TODO FIX properly
+        uniqueKey="name" //From Item select what to save in the array for storage, name -> "Freezer"
+        modalAnimationType="slide"
+        // colors={{ primary: "black" }}
+        hideSearch={false}
+        readOnlyHeadings={true}
+        subKey="items"
+        selectText="Select information"
+        close-on-select="false"
+        headerComponent={<MultiSelectHeader />}
+        footerComponent={<MultiSelectFooter itemCount={selected?.length} />}
+        onSelectedItemsChange={setSelected}
+        selectedItems={selected}
+        onConfirm={setSavedSelcted}
+        styles={SectionedMultiSelectStyle}
+        //ing: EDIT Works on phone
+      ></SectionedMultiSelect>
     );
   };
 
   return (
-    <View style={divStyles.container}>
+    <View id="SHOW YOURSELF" style={screenStyles.centeredContent}>
       <MultiSelectComponent></MultiSelectComponent>
-      {/* FIX STYLING */}
-      {/* FIX SO SCROLLING WORKS PROPERLY */}
-      <ScrollView>
+
+      <ScrollView
+        style={screenStyles.scrollViewContentCentered}
+        contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
+      >
         {toSaveItems.map((item) => (
-          <View key={item.id}>
+          <View style={{ backgroundColor: futureColors.primary }} key={item.id}>
             <Text style={textStyles.smallTitleText}>{item.name}</Text>
 
             <TextInput
@@ -203,38 +204,31 @@ const CreateHouse: React.FC<CreateHouseProps> = ({ navigation }) => {
       </ScrollView>
 
       {toSaveItems.length > 0 && (
-        <Pressable
-          style={buttonStyles.saveButton}
-          onPress={() => {
-            console.log("Button pressed");
-            const address = toSaveItems.find((i) => i.name === "Address");
-            console.log("Address found");
+        <View style={screenStyles.fullWidthContainer}>
+          <Pressable
+            style={buttonStyles.saveButton}
+            onPress={() => {
+              console.log("Button pressed");
+              const address = toSaveItems.find((i) => i.name === "Address");
+              console.log("Address found");
 
-            if (Platform.OS === "web") {
-              // WEB SAVE, Alerts doesn't work on web
-              if (!address) {
-                console.log("No address field");
-                return;
-              }
-              if (!address.name || address.value.trim() === "") {
-                console.log("Invalid address");
-                return;
-              }
-              handleSave(address.value);
-            } else {
-              // MOBILE SAVE, with alerts
-              if (!address) {
-                Alert.alert("No address field", "You have to choose address", [
-                  {
-                    text: "OK",
-                    style: "cancel",
-                  },
-                ]);
-              } else {
+              if (Platform.OS === "web") {
+                // WEB SAVE, Alerts doesn't work on web
+                if (!address) {
+                  console.log("No address field");
+                  return;
+                }
                 if (!address.name || address.value.trim() === "") {
+                  console.log("Invalid address");
+                  return;
+                }
+                handleSave(address.value);
+              } else {
+                // MOBILE SAVE, with alerts
+                if (!address) {
                   Alert.alert(
-                    "Invalid Address",
-                    "Address cannot be empty, please enter a valid address",
+                    "No address field",
+                    "You have to choose address",
                     [
                       {
                         text: "OK",
@@ -243,27 +237,40 @@ const CreateHouse: React.FC<CreateHouseProps> = ({ navigation }) => {
                     ],
                   );
                 } else {
-                  Alert.alert(
-                    "Confirm Save",
-                    `Do you want to save this house at ${address.value}?`,
-                    [
-                      {
-                        text: "Cancel",
-                        style: "cancel",
-                      },
-                      {
-                        text: "Save",
-                        onPress: () => handleSave(address.value),
-                      },
-                    ],
-                  );
+                  if (!address.name || address.value.trim() === "") {
+                    Alert.alert(
+                      "Invalid Address",
+                      "Address cannot be empty, please enter a valid address",
+                      [
+                        {
+                          text: "OK",
+                          style: "cancel",
+                        },
+                      ],
+                    );
+                  } else {
+                    Alert.alert(
+                      "Confirm Save",
+                      `Do you want to save this house at ${address.value}?`,
+                      [
+                        {
+                          text: "Cancel",
+                          style: "cancel",
+                        },
+                        {
+                          text: "Save",
+                          onPress: () => handleSave(address.value),
+                        },
+                      ],
+                    );
+                  }
                 }
               }
-            }
-          }}
-        >
-          <Text style={buttonStyles.saveButtonText}>Save</Text>
-        </Pressable>
+            }}
+          >
+            <Text style={buttonStyles.saveButtonText}>Save</Text>
+          </Pressable>
+        </View>
       )}
     </View>
   );

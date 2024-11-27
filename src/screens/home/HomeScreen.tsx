@@ -7,14 +7,16 @@ import { HomeScreenProps } from "../../types/navigation";
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   return (
     <SafeAreaView style={screenStyles.safeArea}>
-      <View>
+      <View style={screenStyles.headerContainer}>
         <Text style={textStyles.titleText}>Your Homes</Text>
-        {/* <PropertyList/> */}
-        {/* Needs to be updated without reloading the app */}
-        <ViewHouses navigation={navigation}></ViewHouses>
-        {/* TODO: Show upcoming expiring date, example: Air filter cleaning in ... */}
-        {/* TODO: Create in features the show proporties with limited info until clicked open */}
       </View>
+      {/* <View> */}
+      {/* <PropertyList/> */}
+      {/* Needs to be updated without reloading the app */}
+      <ViewHouses navigation={navigation}></ViewHouses>
+      {/* TODO: Show upcoming expiring date, example: Air filter cleaning in ... */}
+      {/* TODO: Create in features the show proporties with limited info until clicked open */}
+      {/* </View> */}
     </SafeAreaView>
   );
 };

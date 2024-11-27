@@ -13,7 +13,22 @@ const Stack = createStackNavigator<RootStackParamList>();
 const TabNavigator = () => {
   return (
     <Tab.Navigator
-      screenOptions={() => ({
+      screenOptions={{
+        tabBarHideOnKeyboard: true,
+        tabBarVisibilityAnimationConfig: {
+          show: {
+            animation: "timing",
+            config: {
+              duration: 0,
+            },
+          },
+          hide: {
+            animation: "timing",
+            config: {
+              duration: 0,
+            },
+          },
+        },
         tabBarActiveTintColor: futureColors.accent,
         tabBarInactiveTintColor: futureColors.secondary,
         tabBarStyle: NavStyles.navbar,
@@ -31,22 +46,15 @@ const TabNavigator = () => {
           margin: 5,
           borderWidth: 2,
           borderRadius: 10,
-          borderColor: `${futureColors.highlight}40`, // 40 is opacity
-          // borderTopColor: futureColors.primary,
-          // borderLeftColor: futureColors.highlight,
-          // borderRightColor: futureColors.shadow,
-          // borderBottomColor: futureColors.shadow,
-          // backgroundColor: futureColors.primary,
-          // Remove borderRadius for more retro look
+          borderColor: `${futureColors.highlight}40`,
         },
         headerShown: false,
         headerStyle: NavStyles.navbar,
         headerTitleStyle: NavStyles.navbarText,
         headerTintColor: futureColors.primary,
         tabBarShowLabel: true,
-        tabBarShowIcon: false,
         tabBarLabelPosition: "below-icon",
-      })}
+      }}
     >
       <Tab.Screen
         name="Home"
@@ -70,7 +78,7 @@ const TabNavigator = () => {
 const AppNavigation = () => (
   <Stack.Navigator
     screenOptions={{
-      headerShown: true,
+      headerShown: false,
       headerTitleStyle: NavStyles.navTitle,
     }}
   >

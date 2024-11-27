@@ -45,7 +45,6 @@ export const textStyles = StyleSheet.create({
     fontSize: 40,
     fontWeight: "600",
     color: futureColors.text,
-    marginTop: 20,
     marginLeft: 10,
     textShadowColor: futureColors.highlight,
     textShadowOffset: { width: 0, height: 0 },
@@ -76,9 +75,13 @@ export const screenStyles = StyleSheet.create({
   },
   headerContainer: {
     ...futuristicBase,
+    flexDirection: "row",
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: 10,
+    paddingTop: 40,
 
-    paddingHorizontal: 16,
-    paddingVertical: 12,
     borderBottomWidth: 1,
     borderBottomColor: `${futureColors.border}30`,
     backgroundColor: futureColors.surface,
@@ -90,6 +93,17 @@ export const screenStyles = StyleSheet.create({
   scrollViewContent: {
     flexGrow: 1,
     paddingBottom: 20,
+    width: "100%",
+  },
+  scrollViewContentCentered: {
+    flex: 1,
+    paddingBottom: 20,
+    width: "100%",
+    backgroundColor: futureColors.primary,
+  },
+  fullWidthContainer: {
+    width: "100%",
+    padding: 10,
   },
   section: {
     ...futuristicBase,
@@ -128,7 +142,8 @@ export const screenStyles = StyleSheet.create({
   centeredContent: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
+    alignContent: "center",
+    width: "100%",
     backgroundColor: futureColors.primary,
   },
   floatingButton: {
@@ -168,14 +183,13 @@ export const NavStyles = StyleSheet.create({
   navbar: {
     ...futuristicBase,
     borderRadius: 0,
-    backgroundColor: futureColors.primary,
+    backgroundColor: futureColors.surface,
     borderBottomWidth: 0,
     borderTopWidth: 0,
-    // borderBottomColor: `${futureColors.border}50`,
-    // borderTopColor: `${futureColors.primary}99`,
     height: 60,
     justifyContent: "center",
     paddingHorizontal: 10,
+    // position: "static(",
   },
   navbarText: {
     color: futureColors.text,
@@ -237,6 +251,7 @@ export const buttonStyles = StyleSheet.create({
     backgroundColor: futureColors.error,
     paddingVertical: 12,
     paddingHorizontal: 24,
+    marginTop: 10,
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 1,
@@ -247,6 +262,17 @@ export const buttonStyles = StyleSheet.create({
     backgroundColor: futureColors.accent,
     paddingVertical: 12,
     paddingHorizontal: 24,
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: `${futureColors.highlight}40`,
+  },
+  backButton: {
+    ...futuristicBase,
+    backgroundColor: futureColors.accent,
+    alignSelf: "center",
+    paddingVertical: 10,
+    width: 75,
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 1,
@@ -276,18 +302,21 @@ export const listStyles = StyleSheet.create({
 
     backgroundColor: futureColors.surface,
     padding: 16,
-    marginVertical: 6,
+    marginVertical: 15,
     marginHorizontal: 8,
     borderRadius: 8,
     borderWidth: 1,
     borderColor: `${futureColors.border}30`,
+    width: "97%",
   },
   itemTitle: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "600",
+    textShadowColor: futureColors.highlight,
+    textShadowRadius: 5,
     color: futureColors.text,
-    marginBottom: 8,
-    letterSpacing: 0.5,
+    letterSpacing: 2,
+    textAlign: "center",
   },
   itemContent: {
     color: futureColors.textSecondary,
@@ -487,7 +516,7 @@ export const dropdownStyles = StyleSheet.create({
     margin: 8,
   },
   multiSelectHeader: {
-    height: 40,
+    height: 20,
     backgroundColor: futureColors.accent,
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
@@ -543,14 +572,17 @@ export const layoutStyles = StyleSheet.create({
 });
 
 export const SectionedMultiSelectStyle = StyleSheet.create({
+  backdrop: {
+    backgroundColor: futureColors.primary,
+  },
+  background: {
+    backgroundColor: futureColors.primary,
+  },
   selectToggle: {
     ...futuristicBase,
     backgroundColor: futureColors.surface,
     padding: 12,
     margin: 8,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: futureColors.border,
   },
   selectToggleText: {
     color: futureColors.text,
@@ -558,6 +590,9 @@ export const SectionedMultiSelectStyle = StyleSheet.create({
     fontWeight: "500",
     letterSpacing: 0.5,
     textAlign: "center",
+  },
+  subItem: {
+    backgroundColor: futureColors.primary,
   },
   subItemText: {
     color: futureColors.textSecondary,
@@ -571,11 +606,24 @@ export const SectionedMultiSelectStyle = StyleSheet.create({
     borderRadius: 4,
     overflow: "hidden",
   },
+  item: {
+    backgroundColor: futureColors.primary,
+    borderWidth: 0,
+  },
   itemText: {
-    color: futureColors.secondary,
+    color: futureColors.text,
+    // backgroundColor: futureColors.primary,
     fontSize: 16,
     padding: 12,
     textAlign: "center",
+  },
+  itemIcon: {
+    color: futureColors.primary,
+    borderWidth: 0,
+  },
+  toggleIcon: {
+    backgroundColor: futureColors.primary,
+    borderWidth: 0,
   },
   chipContainer: {
     backgroundColor: futureColors.secondary,
@@ -617,13 +665,21 @@ export const SectionedMultiSelectStyle = StyleSheet.create({
     paddingVertical: 8,
   },
   container: {
-    ...futuristicBase,
-
+    // ...futuristicBase,
+    flex: 1,
     backgroundColor: futureColors.primary,
     borderRadius: 12,
+    width: "98%", // First stage of opening width
+    // justifyContent: "center",
+    alignSelf: "center",
   },
+
   modalWrapper: {
     backgroundColor: futureColors.overlay,
+    width: "100%",
+    flex: 1,
+    paddingBottom: 0,
+    marginBottom: 0,
   },
   button: {
     ...futuristicBase,

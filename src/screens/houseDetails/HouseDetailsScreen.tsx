@@ -5,6 +5,7 @@ import {
   DetailsStyles,
   buttonStyles,
   screenStyles,
+  listStyles,
 } from "../../styles";
 import { Pressable } from "react-native";
 import ViewDetails from "../../components/ViewDetails";
@@ -13,6 +14,7 @@ import * as Storage from "../../functions/storage";
 import { eventEmitter } from "../../components/CreateHouse";
 import { Platform } from "react-native";
 import { HouseDetailsScreenProps } from "../../types/navigation";
+import BackButton from "components/backButton";
 
 const HouseDetailsScreen: React.FC<HouseDetailsScreenProps> = ({
   navigation,
@@ -50,32 +52,41 @@ const HouseDetailsScreen: React.FC<HouseDetailsScreenProps> = ({
 
   return (
     <SafeAreaView style={screenStyles.safeArea}>
-      <ScrollView>
-        <View style={{ padding: 16 }}>
-          {isEditing ? (
-            <EditDetails
-              houseDetails={houseData}
-              onSave={() => {
-                setIsEditing(false);
-                fetchHouseData();
-                // Optionally refresh the data or navigate back
-              }}
-            />
-          ) : (
-            <ViewDetails houseDetails={currentHouseDetails} />
-          )}
-          <Pressable
-            style={buttonStyles.editButton}
-            onPress={() => setIsEditing(!isEditing)}
-          >
-            <Text style={buttonStyles.buttonText}>
-              {isEditing ? "Cancel Editing" : "Edit Details"}
-            </Text>
-          </Pressable>
-        </View>
-        <Pressable onPress={() => navigation.goBack()}>
-          <Text>DEV Go back</Text>
+      <View style={screenStyles.headerContainer}>
+        <Text style={textStyles.titleText}>House Information</Text>
+        <BackButton navigation={navigation} />
+      </View>
+      <View style={screenStyles.centeredContent}>
+        <ScrollView
+          contentContainerStyle={{
+            flexGrow: 1,
+            justifyContent: "center",
+          }}
+        >
+          <View>
+            {isEditing ? (
+              <EditDetails
+                houseDetails={houseData}
+                onSave={() => {
+                  setIsEditing(false);
+                  fetchHouseData();
+                  // Optionally refresh the data or navigate back
+                }}
+              />
+            ) : (
+              <ViewDetails houseDetails={currentHouseDetails} />
+            )}
+          </View>
+        </ScrollView>
+        <Pressable
+          style={buttonStyles.editButton}
+          onPress={() => setIsEditing(!isEditing)}
+        >
+          <Text style={buttonStyles.buttonText}>
+            {isEditing ? "Cancel Editing" : "Edit Details"}
+          </Text>
         </Pressable>
+
         <Pressable
           style={buttonStyles.deleteButton}
           onPress={() => {
@@ -108,7 +119,7 @@ const HouseDetailsScreen: React.FC<HouseDetailsScreenProps> = ({
         >
           <Text style={buttonStyles.buttonText}>Delete</Text>
         </Pressable>
-      </ScrollView>
+      </View>
     </SafeAreaView>
   );
 };
