@@ -158,7 +158,7 @@ const CreateHouse: React.FC<CreateHouseProps> = ({ navigation }) => {
       <ScrollView>
         <SectionedMultiSelect
           items={HouseInfo}
-          IconRenderer={Icon} // TODO FIX
+          IconRenderer={Icon as any} // TODO FIX properly
           uniqueKey="name" //From Item select what to save in the array for storage, name -> "Freezer"
           modalAnimationType="slide"
           // colors={{ primary: "black" }}
