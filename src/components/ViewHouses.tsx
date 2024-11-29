@@ -9,8 +9,6 @@ import {
 import {
   DetailsStyles,
   buttonStyles,
-  divStyles,
-  futureColors,
   listStyles,
   screenStyles,
   textStyles,
@@ -18,6 +16,7 @@ import {
 import * as Storage from "../functions/storage";
 import { eventEmitter } from "./CreateHouse";
 import { HomeScreenNavigationProp } from "../types/navigation";
+import ConfButton from "./ConfigurableButton";
 
 // TODO: Move to seperate types.ts?
 
@@ -38,16 +37,18 @@ const ViewHouses: React.FC<ViewHousesProps> = ({ navigation }) => {
     fetchHouses();
 
     const handleHouseAdded = () => {
-      console.log("New house added! Updating view houses");
+      console.log("New house added! / Edited house Updating view houses");
       fetchHouses();
     };
 
     // event listener
     eventEmitter.on("houseAdded", handleHouseAdded);
+    eventEmitter.on("houseEdited", handleHouseAdded);
 
     // Listener cleanup
     return () => {
       eventEmitter.removeListener("houseAdded", handleHouseAdded);
+      eventEmitter.removeListener("houseEdited", handleHouseAdded);
     };
   }, []);
 
@@ -109,12 +110,13 @@ const ViewHouses: React.FC<ViewHousesProps> = ({ navigation }) => {
       )}
 
       {__DEV__ && (
-        <Pressable
-          style={buttonStyles.deleteButton}
-          onPress={Storage.removeAll}
-        >
-          <Text style={buttonStyles.buttonText}>DEV Remove all houses</Text>
-        </Pressable>
+        <View>
+          <ConfButton
+            style={buttonStyles.deleteButton}
+            onPress={Storage.removeAll}
+            text={"DEV Remove all houses"}
+          />
+        </View>
       )}
     </View>
   );

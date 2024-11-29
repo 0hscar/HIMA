@@ -16,6 +16,7 @@ import {
   HouseDetail,
   CategorizedDetails,
 } from "../types/component";
+import ConfButton from "./ConfigurableButton";
 
 const EditDetails: React.FC<EditDetailsProps> = ({ houseDetails, onSave }) => {
   const [editedDetails, setEditedDetails] = useState(houseDetails);
@@ -151,12 +152,11 @@ const EditDetails: React.FC<EditDetailsProps> = ({ houseDetails, onSave }) => {
                 </View>
               ),
             )}
-            <Pressable
+            <ConfButton
               style={buttonStyles.saveButton}
               onPress={() => handleSave(houseName)}
-            >
-              <Text style={buttonStyles.buttonText}>Save Changes</Text>
-            </Pressable>
+              text={"Save Changes"}
+            />
           </View>
         );
       })}

@@ -14,7 +14,8 @@ import * as Storage from "../../functions/storage";
 import { eventEmitter } from "../../components/CreateHouse";
 import { Platform } from "react-native";
 import { HouseDetailsScreenProps } from "../../types/navigation";
-import BackButton from "components/backButton";
+import BackButton from "components/BackButton";
+import ConfButton from "components/ConfigurableButton";
 
 const HouseDetailsScreen: React.FC<HouseDetailsScreenProps> = ({
   navigation,
@@ -66,7 +67,7 @@ const HouseDetailsScreen: React.FC<HouseDetailsScreenProps> = ({
           <View>
             {isEditing ? (
               <EditDetails
-                houseDetails={houseData}
+                houseDetails={currentHouseDetails}
                 onSave={() => {
                   setIsEditing(false);
                   fetchHouseData();
@@ -78,20 +79,17 @@ const HouseDetailsScreen: React.FC<HouseDetailsScreenProps> = ({
             )}
           </View>
         </ScrollView>
-        <Pressable
+        <ConfButton
           style={
             !isEditing
               ? buttonStyles.editButton
               : buttonStyles.stopEditingButton
           }
           onPress={() => setIsEditing(!isEditing)}
-        >
-          <Text style={buttonStyles.buttonText}>
-            {isEditing ? "Cancel Editing" : "Edit Details"}
-          </Text>
-        </Pressable>
+          text={isEditing ? "Cancel Editing" : "Edit Details"}
+        />
 
-        <Pressable
+        <ConfButton
           style={buttonStyles.deleteButton}
           onPress={() => {
             console.log("Delete button pressed");
@@ -120,9 +118,8 @@ const HouseDetailsScreen: React.FC<HouseDetailsScreenProps> = ({
               );
             }
           }}
-        >
-          <Text style={buttonStyles.buttonText}>Delete</Text>
-        </Pressable>
+          text={"Delete"}
+        />
       </View>
     </SafeAreaView>
   );

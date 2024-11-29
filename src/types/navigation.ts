@@ -1,7 +1,11 @@
-import { CompositeNavigationProp } from "@react-navigation/native";
+import {
+  CompositeNavigationProp,
+  NavigationProp,
+} from "@react-navigation/native";
 import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RouteProp } from "@react-navigation/native";
+import { GestureResponderEvent } from "react-native";
 
 export type RootStackParamList = {
   HIMA: undefined; // CHANGE TO SOME LOGO AT SOMEPOINT?
@@ -43,4 +47,16 @@ export interface CreateNewScreenProps {
 export interface HouseDetailsScreenProps {
   navigation: HouseDetailsNavigationProp;
   route: HouseDetailsRouteProp;
+}
+
+export interface BackButtonProps {
+  navigation: NavigationProp<any>;
+  text?: string;
+  style?: object;
+}
+
+export interface ConfButtonProps {
+  text?: string;
+  style?: object;
+  onPress?: () => Promise<void | {} | undefined> | void;
 }
