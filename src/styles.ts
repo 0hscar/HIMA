@@ -15,6 +15,7 @@ export const futureColors = {
   surface: "#222339", // Card surface color
   border: "#464973", // Border color
   overlay: "rgba(26, 27, 46, 0.8)", // Modal overlay
+  editing: "#a67d00", // Editing color.
 };
 
 // Common properties for the futuristic look
@@ -259,6 +260,16 @@ export const buttonStyles = StyleSheet.create({
   },
   editButton: {
     ...futuristicBase,
+    backgroundColor: futureColors.editing,
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: `${futureColors.highlight}40`,
+  },
+  stopEditingButton: {
+    ...futuristicBase,
     backgroundColor: futureColors.accent,
     paddingVertical: 12,
     paddingHorizontal: 24,
@@ -300,7 +311,7 @@ export const listStyles = StyleSheet.create({
   item: {
     ...futuristicBase,
 
-    backgroundColor: futureColors.surface,
+    backgroundColor: futureColors.secondary,
     padding: 16,
     marginVertical: 15,
     marginHorizontal: 8,
@@ -376,6 +387,12 @@ export const DetailsStyles = StyleSheet.create({
     padding: 20,
     margin: 8,
   },
+  categoryContainer: {
+    ...futuristicBase,
+    backgroundColor: futureColors.secondary,
+    padding: 20,
+    margin: 8,
+  },
   houseName: {
     ...textStyles.smallTitleText,
     fontSize: 24,
@@ -393,11 +410,22 @@ export const DetailsStyles = StyleSheet.create({
     borderBottomColor: `${futureColors.border}50`,
     alignItems: "center",
   },
-  label: {
+  categoryLabel: {
+    ...textStyles.smallTitleText,
+    flex: 1,
+    fontSize: 18,
+    marginTop: 0,
+    marginLeft: 0,
+    fontWeight: "bold",
+    color: futureColors.text,
+    letterSpacing: 0.5,
+    paddingRight: 8,
+  },
+  detailLabel: {
     flex: 1,
     fontSize: 14,
     fontWeight: "500",
-    color: futureColors.textSecondary,
+    color: futureColors.text,
     letterSpacing: 0.5,
     paddingRight: 8,
   },
@@ -427,19 +455,26 @@ export const DetailsStyles = StyleSheet.create({
     fontWeight: "600",
     letterSpacing: 0.5,
   },
-  editButton: {
-    ...futuristicBase,
 
-    backgroundColor: futureColors.accent,
-    padding: 12,
-    borderRadius: 8,
-    marginTop: 10,
-  },
   input: {
     ...futuristicInput,
-    flex: 1,
-    marginLeft: 8,
+    flex: 2,
+    // borderColor: `${futureColors.success}80`,
+    backgroundColor: futureColors.secondary,
   },
+  notEditedInput: {
+    ...futuristicInput,
+    flex: 2,
+    // borderColor: `${futureColors.success}80`,
+    backgroundColor: futureColors.accent,
+  },
+  editedInput: {
+    ...futuristicInput,
+    flex: 2,
+    // borderColor: `${futureColors.success}80`,
+    backgroundColor: futureColors.editing,
+  },
+
   // ... update other detail styles
 });
 

@@ -7,6 +7,7 @@ import {
   View,
 } from "react-native";
 import {
+  DetailsStyles,
   buttonStyles,
   divStyles,
   futureColors,

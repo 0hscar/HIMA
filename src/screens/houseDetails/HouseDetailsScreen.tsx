@@ -79,7 +79,11 @@ const HouseDetailsScreen: React.FC<HouseDetailsScreenProps> = ({
           </View>
         </ScrollView>
         <Pressable
-          style={buttonStyles.editButton}
+          style={
+            !isEditing
+              ? buttonStyles.editButton
+              : buttonStyles.stopEditingButton
+          }
           onPress={() => setIsEditing(!isEditing)}
         >
           <Text style={buttonStyles.buttonText}>

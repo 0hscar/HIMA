@@ -8,7 +8,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   return (
     <SafeAreaView style={screenStyles.safeArea}>
       <View style={screenStyles.headerContainer}>
-        <Text style={textStyles.titleText}>Your Homes githubpush test</Text>
+        <Text style={textStyles.titleText}>Your Homes</Text>
       </View>
       {/* <View> */}
       {/* <PropertyList/> */}
