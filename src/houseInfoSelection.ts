@@ -4,6 +4,7 @@ export interface SubItem {
   type?: string;
   placeholder?: string;
 }
+
 export interface Item {
   name: string;
   id: number;
@@ -12,132 +13,225 @@ export interface Item {
 
 export const HouseInfo: Item[] = [
   {
-    name: "Basic Information",
-    id: 1,
+    name: "Location and building information",
+    id: 10,
     items: [
       { name: "Address", id: 100, placeholder: "Enter Address" },
       {
-        name: "Register number",
+        name: "Postcode",
         id: 101,
+        placeholder: "Enter Postcode",
         type: "numeric",
-        placeholder: "Enter Registration number",
       },
       {
-        name: "Year Built",
+        name: "Post Office / City",
         id: 102,
-        type: "numeric",
-        placeholder: "Enter year built",
+        placeholder: "Enter Post Office / City",
       },
       {
-        name: "Square Meters",
+        name: "District / Village",
         id: 103,
-        type: "numeric",
-        placeholder: "Enter Square meters",
+        placeholder: "Enter District / Village",
       },
       {
-        name: "Building Material",
+        name: "Plot / Farm / Block number",
         id: 104,
-        placeholder: "Enter Building material",
+        placeholder: "Enter Plot / Farm / Block number",
+        type: "numeric",
       },
-      { name: "Roof Material", id: 105, placeholder: "Enter Roof Material" },
-      { name: "Heating", id: 106, placeholder: "Enter Heating solutions" },
       {
-        name: "Garage",
+        name: "Land Registry Number",
+        id: 105,
+        placeholder: "Enter Land Registry Number",
+        type: "numeric",
+      },
+      {
+        name: "Building Permit Date",
+        id: 106,
+        placeholder: "Enter Building Permit Date",
+      },
+      {
+        name: "Final Inspection Date",
         id: 107,
-        placeholder: "Enter Garage and size in Square meters",
+        placeholder: "Enter Final Inspection Date",
+      },
+      {
+        name: "Commissioning Date",
+        id: 108,
+        placeholder: "Enter Commissioning Date",
       },
     ],
   },
   {
-    name: "Household Appliances",
-    id: 2,
+    name: "Area and Volume Information",
+    id: 11,
     items: [
       {
-        name: "Fridge",
-        id: 200,
-        placeholder: "Enter Model / Name / year bought",
+        name: "Floor area (m²)",
+        id: 110,
+        type: "numeric",
+        placeholder: "Enter Floor Area (m²)",
       },
       {
-        name: "Freezer",
-        id: 201,
-        placeholder: "Enter Model / Name / year bought",
+        name: "Living area (m²)",
+        id: 111,
+        type: "numeric",
+        placeholder: "Enter Living Area (m²)",
       },
       {
-        name: "Oven",
-        id: 202,
-        placeholder: "Enter Model / Name / year bought",
-      },
-      {
-        name: "Microwave",
-        id: 203,
-        placeholder: "Enter Model / Name / year bought",
-      },
-      {
-        name: "Washing Machine",
-        id: 204,
-        placeholder: "Enter Model / Name / year bought",
-      },
-      {
-        name: "Dryer",
-        id: 205,
-        placeholder: "Enter Model / Name / year bought",
-      },
-      {
-        name: "Vacum/Hoover",
-        id: 206,
-        placeholder: "Enter Model / Name / year bought",
+        name: "Total Volume (m³)",
+        id: 112,
+        type: "numeric",
+        placeholder: "Enter Total Value (m³)",
       },
     ],
   },
   {
-    name: "Service Needs",
-    id: 3,
+    name: "Space Information",
+    id: 12,
     items: [
       {
-        name: "Gutters",
-        id: 300,
-        placeholder: "Enter last cleaned / changed",
+        name: "Total Rooms (amount)",
+        id: 120,
+        type: "numeric",
+        placeholder: "Enter Total Amount of Rooms",
       },
       {
-        name: "Air Filters",
-        id: 301,
-        placeholder: "Enter last cleaned / changed",
+        name: "Attic space (Heated, m²)",
+        id: 121,
+        type: "numeric",
+        placeholder: "Enter Heated Attic space (m²)",
       },
       {
-        name: "Chimney Sweeping",
-        id: 302,
-        placeholder: "Enter last cleaned / changed",
+        name: "Attic space (Non-heated, m²)",
+        id: 122,
+        type: "numeric",
+        placeholder: "Enter Non-heated Attic space (m²)",
+      },
+      {
+        name: "Cellar space (Heated, m²)",
+        id: 123,
+        type: "numeric",
+        placeholder: "Enter Heated Cellar space (m²)",
+      },
+      {
+        name: "Cellar space (Non-heated, m²)",
+        id: 124,
+        type: "numeric",
+        placeholder: "Enter Non-heated Cellar space (m²)",
+      },
+      {
+        name: "Sauna space (m²)",
+        id: 125,
+        type: "numeric",
+        placeholder: "Enter Sauna space(m²)",
+      },
+      {
+        name: "Head Distribution Room (m²)",
+        id: 126,
+        type: "numeric",
+        placeholder: "Enter Heat Distribution Room space(m²)",
+      },
+      {
+        name: "Storage space (m²)",
+        id: 127,
+        type: "numeric",
+        placeholder: "Enter Storage space(m²)",
+      },
+      {
+        name: "Garage space (m²)",
+        id: 128,
+        type: "numeric",
+        placeholder: "Enter Garage space(m²)",
       },
     ],
   },
   {
-    name: "On Going Costs",
-    id: 4,
+    name: "Plot Information",
+    id: 13,
     items: [
       {
-        name: "Water",
-        id: 400,
+        name: "Plot area (m²)",
+        id: 130,
         type: "numeric",
-        placeholder: "Enter estimated per month",
-      },
-      {
-        name: "Electricity",
-        id: 401,
-        type: "numeric",
-        placeholder: "Enter estimated per month",
-      },
-      {
-        name: "Trash",
-        id: 402,
-        type: "numeric",
-        placeholder: "Enter estimated per month",
-      },
-      {
-        name: "Insurances",
-        id: 403,
-        type: "numeric",
-        placeholder: "Enter estimated per month",
+        placeholder: "Enter Plot area (m²)",
       },
     ],
+  },
+  {
+    name: "Foundations",
+    id: 14,
+    items: [
+      {
+        name: "Foundations",
+        id: 140,
+        placeholder: "Enter foundation (Concrete base? Steel beams? etc...)",
+        // Add checkboxes for the usual suspects + input field for "else"
+      },
+    ],
+  },
+  {
+    name: "Frame",
+    id: 15,
+    items: [{ name: "Waiting for checkbox support!", id: 150 }],
+  },
+  {
+    name: "Facades",
+    id: 16,
+    items: [{ name: "Waiting for checkbox support!", id: 160 }],
+  },
+  {
+    name: "Roof",
+    id: 17,
+    items: [{ name: "Waiting for checkbox support!", id: 170 }],
+  },
+  {
+    name: "House Technology",
+    id: 18,
+    items: [{ name: "Waiting for checkbox support!", id: 180 }],
+  },
+  {
+    name: "Material Information",
+    id: 19,
+    items: [
+      {
+        name: "Water Pipes (Inside)",
+        id: 190,
+        placeholder: "Enter Water Pipe Material",
+      },
+      {
+        name: "Water Pipes (On the plot)",
+        id: 191,
+        placeholder: "Enter Water Pipe Material",
+      },
+      {
+        name: "Sewer Pipes (Inside)",
+        id: 192,
+        placeholder: "Enter Sewer Pipe Material",
+      },
+      {
+        name: "Sewer Pipes (On the plot)",
+        id: 193,
+        placeholder: "Enter Sewer Pipe Material",
+      },
+    ],
+  },
+  {
+    name: "Construction Contact Information",
+    id: 20,
+    items: [{ name: "Waiting Multi-input support!", id: 200 }],
+  },
+  {
+    name: "Target values and operating schedules",
+    id: 21,
+    items: [{ name: "Waiting for checkbox support!", id: 210 }],
   },
 ];
+
+// Figure out smart way to include Energy and water consumption (per month, last years values, goal)
+// Service calendar, Forced on user in edit field?
+// Correction diary
+// Maintanance plan?
+// Surface materials and surface treatment agents, inside and outside?
+// Useful contacts?
+//

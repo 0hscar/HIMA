@@ -24,7 +24,6 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import { EventEmitter } from "events";
 import SectionedMultiSelect from "react-native-sectioned-multi-select";
 import { CreateNewScreenNavigationProp } from "../types/navigation";
-import ConfButton from "./ConfigurableButton";
 
 interface CreateHouseProps extends ItemProps {
   navigation: CreateNewScreenNavigationProp;
@@ -206,7 +205,7 @@ const CreateHouse: React.FC<CreateHouseProps> = ({ navigation }) => {
 
       {toSaveItems.length > 0 && (
         <View style={screenStyles.fullWidthContainer}>
-          <ConfButton
+          <Pressable
             style={buttonStyles.saveButton}
             onPress={() => {
               console.log("Button pressed");
@@ -268,8 +267,9 @@ const CreateHouse: React.FC<CreateHouseProps> = ({ navigation }) => {
                 }
               }
             }}
-            text="Save"
-          />
+          >
+            <Text style={buttonStyles.saveButtonText}>Save</Text>
+          </Pressable>
         </View>
       )}
     </View>

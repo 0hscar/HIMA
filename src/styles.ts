@@ -619,12 +619,30 @@ export const SectionedMultiSelectStyle = StyleSheet.create({
     padding: 12,
     margin: 8,
   },
+
   selectToggleText: {
     color: futureColors.text,
     fontSize: 16,
     fontWeight: "500",
     letterSpacing: 0.5,
     textAlign: "center",
+  },
+  checkbox: {
+    width: 20,
+    height: 20,
+    borderRadius: 3,
+    borderWidth: 1,
+    borderColor: futureColors.border,
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 10,
+  },
+  checkboxSelected: {
+    backgroundColor: futureColors.accent,
+  },
+  checkboxText: {
+    color: futureColors.text,
+    fontWeight: "bold",
   },
   subItem: {
     backgroundColor: futureColors.primary,
